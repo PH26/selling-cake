@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.add');
     }
 
     /**
@@ -34,7 +36,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password'
+            ]);
+        User::create($request->all());
+        return redirect('admin/user/index')->with('notification','The user created successfully');
     }
 
     /**
@@ -56,7 +65,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -66,9 +76,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        request()->validate([
+            'password' => 'required',
+            ]);
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect('admin/user/index')->with('notification','Member updated successfully');
     }
 
     /**
@@ -79,6 +94,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('admin/user/index')->with('notification','The user deleted successfully');
     }
 }

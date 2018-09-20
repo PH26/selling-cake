@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => bcrypt('secret'),
         'remember_token' => str_random(10),
         'address' => $faker->country,
-        'phone' => $faker->numberBetween(100000,999999),
+        'phone' => $faker->e164PhoneNumber,
         'role' => '0',
         'active' => '1',
     ];
