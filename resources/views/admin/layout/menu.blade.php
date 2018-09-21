@@ -91,7 +91,7 @@
 
 						<ul class="submenu">
 							<li class="active">
-								<a href="form-elements.html">
+								<a href="admin/category/index">
 									<i class="menu-icon fa fa-caret-right"></i>
 									List Category
 								</a>
@@ -100,7 +100,7 @@
 							</li>
 
 							<li class="">
-								<a href="form-elements-2.html">
+								<a href="admin/category/add">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Add Category
 								</a>
@@ -126,10 +126,10 @@
 								<a href="#">Home</a>
 							</li>
 
-							<li>
+							<!-- <li>
 								<a href="#">Forms</a>
 							</li>
-							<li class="active">Form Elements</li>
+							<li class="active">Form Elements</li> -->
 						</ul><!-- /.breadcrumb -->
 
 						<div class="nav-search" id="nav-search">

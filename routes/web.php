@@ -28,4 +28,17 @@ Route::group(['prefix' => 'admin'], function(){
 
 		Route::get('delete/{id}', 'UsersController@destroy');
 	});
+
+	Route::group(['prefix' => 'category'], function(){
+
+		Route::get('index', 'CategoriesController@index');
+
+		Route::get('add', 'CategoriesController@create');
+		Route::post('add', 'CategoriesController@store');
+
+		Route::get('edit/{id}', 'CategoriesController@edit');
+		Route::post('edit/{id}', 'CategoriesController@update');
+
+		Route::get('delete/{id}', 'CategoriesController@destroy');
+	});
 });

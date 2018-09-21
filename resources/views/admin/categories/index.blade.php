@@ -2,10 +2,10 @@
 @section('content')
 <div class="page-header">
 							<h1>
-								User Management
+								Category
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									List User
+									List category
 								</small>
 							</h1>
 							<br>
@@ -28,37 +28,22 @@
 													<tr>
 														<th class="center">ID</th>
 														<th class="center">Name</th>
-														<th class="center">Email</th>
-														<th class="center">Address</th>
-														<th class="center">Phone</th>
-														<th class="center">Role</th>
 														<th class="center">Actions</th>
 													</tr>
 												</thead>
 
 												<tbody>
-													@foreach($users as $user)
+													@foreach($categories as $category)
 													<tr>
-														<td class="center">{{$user->id}}</td>
-														<td class="center">{{$user->name}}</td>
-														<td class="center">{{$user->email}}</td>
-														<td class="center">{{$user->address}}</td>
-														<td class="center">{{$user->phone}}</td>
-														<td class="center">
-														@if($user->role == 1)
-															{{"Admin"}}
-														@else
-															{{"Normal"}}
-														@endif
-														</td>
-
+														<td class="center">{{$category->id}}</td>
+														<td class="center">{{$category->name}}</td>
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
-																<a class="green" href="admin/user/edit/{{$user->id}}">
+																<a class="green" href="admin/category/edit/{{$category->id}}">
 																	<i class="ace-icon fa fa-pencil bigger-130"></i>
 																</a>
 
-																<a class="red" href="admin/user/delete/{{$user->id}}">
+																<a class="red" href="admin/category/delete/{{$category->id}}">
 																	<i class="ace-icon fa fa-trash-o bigger-130"></i>
 																</a>
 															</div>
