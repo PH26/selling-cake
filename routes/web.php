@@ -41,4 +41,28 @@ Route::group(['prefix' => 'admin'], function(){
 
 		Route::get('delete/{id}', 'CategoriesController@destroy');
 	});
+	Route::group(['prefix' => 'product'], function(){
+
+		Route::get('index', 'ProductsController@index');
+
+		Route::get('add', 'ProductsController@create');
+		Route::post('add', 'ProductsController@store');
+
+		Route::get('edit/{id}', 'ProductsController@edit');
+		Route::post('edit/{id}', 'ProductsController@update');
+
+		Route::get('delete/{id}', 'ProductsController@destroy');
+	});
+	Route::group(['prefix' => 'slide'], function(){
+
+		Route::get('index', 'SlideController@index');
+
+		Route::get('add', 'SlideController@create');
+		Route::post('add', 'SlideController@store');
+
+		Route::get('edit/{id}', 'SlideController@edit');
+		Route::post('edit/{id}', 'SlideController@update');
+
+		Route::get('delete/{id}', 'SlideController@destroy');
+	});
 });

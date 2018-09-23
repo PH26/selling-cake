@@ -77,7 +77,7 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
         $category->update($request->only('name'));
-        return redirect('admin/category/index')->with('notification','Category updated successfully');
+        return redirect('admin/category/index')->with('notification','The category updated successfully');
     }
 
     /**

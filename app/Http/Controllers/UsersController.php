@@ -83,7 +83,7 @@ class UsersController extends Controller
             ]);
         $user = User::find($id);
         $user->update($request->all());
-        return redirect('admin/user/index')->with('notification','Member updated successfully');
+        return redirect('admin/user/index')->with('notification','The user updated successfully');
     }
 
     /**
