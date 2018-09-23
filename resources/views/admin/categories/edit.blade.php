@@ -23,7 +23,7 @@
 
 						<div class="row">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form" action="admin/user/edit/{{$category->id}}" method='POST'>
+								<form class="form-horizontal" role="form" action="admin/category/edit/{{$category->id}}" method='POST'>
 									{{ csrf_field() }}
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Name</label>

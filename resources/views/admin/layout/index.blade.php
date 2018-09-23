@@ -533,7 +533,9 @@
 				});
 
 			});
-        </script>
+		</script>
+		<script src="admin_asset/ckeditor/ckeditor.js"></script>
+
           @yield('script')
    		  @include('admin.layout.footer')
         </body>
