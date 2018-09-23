@@ -41,8 +41,8 @@
                             </div>
                         @endif
 
-                        @if(session('thongbao'))
-                                {{session('thongbao')}}
+                        @if(session('notification'))
+                                {{session('notification')}}
                         @endif
                         <form role="form" action="admin/dangnhap" method="POST">
                             @csrf
