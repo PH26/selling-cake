@@ -169,6 +169,14 @@
 							</li>
 						</ul>
 					</li>
+					<li class="">
+						<a href="admin/order/index">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Order Manager </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
 
 				</ul><!-- /.nav-list -->
 

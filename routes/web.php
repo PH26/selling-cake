@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //Route for admin
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'admin'], function(){
 	Route::group(['prefix' => 'user'], function(){
 
 		Route::get('index', 'UsersController@index');
@@ -65,6 +65,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 		Route::post('edit/{id}', 'SlideController@update');
 
 		Route::get('delete/{id}', 'SlideController@destroy');
+	});
+	Route::group(['prefix' => 'order'], function(){
+
+		Route::get('index', 'OrderController@index');
 	});
 });
 Auth::routes();
