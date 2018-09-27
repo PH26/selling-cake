@@ -17,7 +17,7 @@
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <div class="ps-badge"><span>-50%</span></div>
-                                <a class="ps-product__overlay" href="product-detail.html"></a><img src="upload/products/{{$product->image}}"  height= '220.27px' alt="">
+                                <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}"  height= '220.27px' alt="">
                                 <ul class="ps-product__action">
                                     <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
                                     <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
@@ -25,8 +25,8 @@
                                     <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">{{$product->name}}</a>
-                                <div class="ps-product__category"><a class="ps-product__category" href="product-listing.html">{{$product->categories->name}}</a>
+                            <div class="ps-product__content"><a class="ps-product__title" href="product/{{$product->id}}">{{$product->name}}</a>
+                                <div class="ps-product__category"><a class="ps-product__category" href="category/{{$product->categories->id}}">{{$product->categories->name}}</a>
                                 </div>
                                 <select class="ps-rating">
                                     <option value="1">1</option>
@@ -54,9 +54,9 @@
                         <div class="ps-section__content">
                             <div class="ps-product--list">
                                 <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="upload/products/{{$product->image}}" alt=""></div>
+                                    <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}" alt=""></div>
                                 <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">{{$product->name}}</a></h4>
+                                    <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
                                         <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}
@@ -74,9 +74,9 @@
                         <div class="ps-section__content">
                             <div class="ps-product--list">
                                 <div class="ps-product__thumbnail">
-                                    <a class="ps-product__overlay" href="product-detail.html"></a><img src="upload/products/{{$product->image}}" alt=""></div>
+                                    <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}" alt=""></div>
                                 <div class="ps-product__content">
-                                    <h4 class="ps-product__title"><a href="product-detail.html">{{$product->name}}</a></h4>
+                                    <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
                                     <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}

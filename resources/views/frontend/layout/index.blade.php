@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="frontend/plugins/revolution/css/settings.css">
     <link rel="stylesheet" href="frontend/plugins/revolution/css/layers.css">
     <link rel="stylesheet" href="frontend/plugins/revolution/css/navigation.css">
+    <script type="text/javascript" src="frontend/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Custom-->
     <link rel="stylesheet" href="frontend/css/style.css">
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
