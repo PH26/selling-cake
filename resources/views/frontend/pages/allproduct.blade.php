@@ -16,7 +16,7 @@
                                         <div class="ps-product">
                                             <div class="ps-product__thumbnail">
                                                 <!-- <div class="ps-badge ps-badge--new"><span>New</span></div> -->
-                                                <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}" height= '220.27px'alt="">
+                                                <a class="ps-product__overlay" href="product-detail.html"></a><img src="upload/products/{{$product->image}}" height= '220.27px'alt="">
                                                 <ul class="ps-product__action">
                                                     <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
                                                     <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
@@ -93,10 +93,9 @@
                                 </div>
                                 <div class="ps-widget__content">
                                     <ul class="ps-list--circle">
-                                        <li class="current">
-                                        <a href="allproduct"><span  id="0" class="circle"></span>All category </a></li>
+                                        <li class="current"><a href="allproduct"><span class="circle"></span>All category </a></li>
                                         @foreach($categories as $category)
-                                        <li><a href="category/{{$category->id}}"><span id="{{$category->id}}" class="circle "></span>{{$category->name}}</a></li>
+                                        <li><a href="category/{{$category->id}}l"><span class="circle"></span>{{$category->name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -151,19 +150,4 @@
         </div>
 
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var span_select = $(".circle");
-        for(var i = 0; i < span_select.length; i++){
-            var category_id = parseInt(span_select[i].id);
-            var current = window.location.pathname;
-            var id = current.split("/")[2];
-            if (id == category_id){
-                $("#" + category_id).parent().parent().attr('class',' current' );
-            } else {
-                $("#" + category_id).parent().parent().removeClass('current' );
-            }
-        }
-    })
-</script>
 @endsection

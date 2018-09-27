@@ -13,7 +13,9 @@
 //Route for frontend
 
 Route::get('/', 'PageController@homepage');
-Route::get('category', 'PageController@category');
+Route::get('allproduct', 'PageController@allProduct');
+Route::get('category/{id}', 'PageController@category');
+Route::get('product/{id}', 'PageController@product');
 
 //Route for admin
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){

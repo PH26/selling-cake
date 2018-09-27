@@ -6,10 +6,10 @@
                         <li class=""><a href="/">Home</a>
                         </li>
                         <li><a href="about.html">About</a></li>
-                        <li class="menu-item-has-children"><a href="category">Categories</a>
+                        <li class="menu-item-has-children"><a href="allproduct">Categories</a>
                             <ul class="sub-menu">
                                 @foreach($categories as $category)
-                                <li><a href="product-listing.html">{{$category->name}}</a></li>
+                                <li><a href="category/{{$category->id}}">{{$category->name}}</a></li>
                                 @endforeach
                             </ul>
                         </li>
