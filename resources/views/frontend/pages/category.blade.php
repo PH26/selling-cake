@@ -35,6 +35,8 @@
                                                     <option value="5">5</option>
                                                 </select>
                                                 <p class="ps-product__price">{{$product->unit_price . ' vnd'}}</p>
+                                                <a href="{{route('themgiohang',$product->id)}}"><button type="button" class="btn btn-danger">add to Cart</button></a>
+                                                
                                             </div>
                                         </div>
                                     </div>

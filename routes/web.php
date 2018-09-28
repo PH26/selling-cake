@@ -66,10 +66,10 @@ Route::group(['prefix' => 'admin'], function(){
 
 		Route::get('delete/{id}', 'SlideController@destroy');
 	});
-	Route::group(['prefix' => 'order'], function(){
+	// Route::group(['prefix' => 'cart'], function(){
 
-		Route::get('index', 'OrderController@index');
-	});
+	// 	Route::get('add/{id}', 'CartController@getAddcart');
+	// });
 });
 Auth::routes();
 
@@ -81,3 +81,12 @@ $this->post('login', 'Auth\LoginController@login');
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('register', 'Auth\RegisterController@register');
 
+
+Route::group(['prefix' => 'cart'], function(){
+	Route::get('add/{id}',['as' => 'themgiohang',
+		'uses' => 'CartController@getAddcart']);
+	Route::get('show',['as' => 'showcart',
+		'uses' => 'CartController@getShowcart']);
+	Route::get('delete/{id}',['as' => 'deletecart',
+		'uses' => 'CartController@getDeletecart']);
+});
