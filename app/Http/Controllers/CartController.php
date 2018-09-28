@@ -19,7 +19,7 @@ class CartController extends Controller
     public function getAddcart($id)
     {
         $product = Product::find($id);
-       Cart::add(['id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->promote_price]);
+       Cart::add(['id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->promote_price ]);
        return back();
         // $aa = Cart::content();
         // dd($aa);

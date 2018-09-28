@@ -1,3 +1,4 @@
+
 <nav class="navigation">
             <div class="container">
                 <div class="menu-toggle"><span></span></div>
@@ -28,18 +29,18 @@
                     </ul>
                     <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>{{Cart::count()}}</i></span><i class="ps-icon--shopping-cart"></i></a>
                         <div class="ps-cart__listing">
-                           
+                         
                             <div class="ps-cart__content">
                                 <div class="ps-cart-item">
                                     <a class="ps-cart-item__close" href="abc"></a>
                                     <div class="ps-cart-item__thumbnail">
                                         <a href="#"></a><img src="images/cake/img-cake-1.jpg" alt=""></div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">ten san pham</a>
+                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">name</a>
                                         <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
                                     </div>
                                 </div>                                
                             </div>
-                          
+                         
                             <div class="ps-cart__total">
                                 <p>Number of items:<span>36</span></p>
                                 <p>Item Total:<span>£528.00</span></p>

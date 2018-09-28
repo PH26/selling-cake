@@ -28,16 +28,16 @@
         <td>{{$item->name}}</td>
         <td>{{$item->qty}}</td>
         <td>{{$item->price}}</td>
-        <td>{{$item->image}}</td>
-        <td><a href="{{route('deletecart', $item->rowId)}}">Delete</a></td>        
+        <td>{{$item->image}}</td>        
+        <td><a href="{{route('deletecart', $item->rowId)}}"><button type="button" class="btn btn-primary">Delete</button></a></td>        
       </tr>
      @endforeach
-     <td >Total: {{$total}}</td>  
+     <td>Total: {{$total}}</td>  
      
     </tbody>
   </table>
   <a href="{{asset('cart/delete/all')}}"><button type="button" class="btn btn-danger pull-right">Delete all</button></a> 
-  <a href="/"><button type="button" class="btn btn-info ">Buy more</button></a>
+  <a href="/category"><button type="button" class="btn btn-info ">Buy more</button></a>
 </div>
 </body>
 </html>

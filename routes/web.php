@@ -85,8 +85,10 @@ $this->post('register', 'Auth\RegisterController@register');
 Route::group(['prefix' => 'cart'], function(){
 	Route::get('add/{id}',['as' => 'themgiohang',
 		'uses' => 'CartController@getAddcart']);
+
 	Route::get('show',['as' => 'showcart',
-		'uses' => 'CartController@getShowcart']);
+		'uses' => 'CartController@getShowcart']); 
+
 	Route::get('delete/{id}',['as' => 'deletecart',
 		'uses' => 'CartController@getDeletecart']);
 });
