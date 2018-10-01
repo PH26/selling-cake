@@ -22,7 +22,6 @@ class PageController extends Controller
         view()->share('categories', $categories);
         view()->share('slides', $slides);
         view()->share('bestsellers', $bestsellers);
-
     }
 
     public function homepage()

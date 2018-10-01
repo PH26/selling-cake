@@ -63,7 +63,7 @@
                             </header>
                             <footer>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-5 col-sm-6 col-xs-12 "><a class="ps-btn--fullwidth ps-btn" href="#">Order Now<i class="fa fa-angle-right"></i></a>
+                                    <div class="col-lg-6 col-md-5 col-sm-6 col-xs-12 "><a class="ps-btn--fullwidth ps-btn" href="{{route('product.addToCart', ['id' => $product->id])}}">Order Now<i class="fa fa-angle-right"></i></a>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12 ">
                                         <p class="ps-product__sharing">Share with:<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-google-plus"></i></a><a href="#"><i class="fa fa-twitter"></i></a></p>
@@ -190,7 +190,7 @@
                                     <option value="5">5</option>
                                 </select>
                                 <p class="ps-product__price">{{$bestseller->unit_price . ' vnd'}}</p>
-                                <a class="ps-btn ps-btn--xs" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
+                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $bestseller->id])}}">Order now<i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         @endforeach
