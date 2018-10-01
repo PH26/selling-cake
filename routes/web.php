@@ -16,6 +16,16 @@ Route::get('/', 'PageController@homepage');
 Route::get('allproduct', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
+Route::get('add-to-cart/{id}', [
+			'uses' => 'PageController@getAddToCart',
+			'as' => 'product.addToCart'
+			]);
+Route::get('delete-item-cart/{id}', [
+			'uses' => 'PageController@getDeleteItemCart',
+			'as' => 'product.deleteItemCart'
+			]);
+Route::get('viewcart', 'PageController@getViewCart');
+Route::post('changeQty/{id}/{qty}', ['as' => 'changeQty', 'uses' => 'PageController@changeQty']);
 
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){

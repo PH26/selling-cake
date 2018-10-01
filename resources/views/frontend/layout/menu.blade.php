@@ -26,40 +26,41 @@
                     <ul class="menu menu--right">
                         <li class=""><a href="#">Signup</a></li>
                     </ul>
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon--shopping-cart"></i></a>
+                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>
+                        @if(Session::has('cart'))
+                            {{Session('cart')->totalQty}}
+                        @else
+                            0
+                        @endif
+                        </i></span><i class="ps-icon--shopping-cart"></i></a>
+                        @if(Session::has('cart'))
                         <div class="ps-cart__listing">
                             <div class="ps-cart__content">
+                                @foreach($product_cart as $product)
                                 <div class="ps-cart-item">
-                                    <a class="ps-cart-item__close" href="#"></a>
+                                    <a class="ps-cart-item__close" href="{{route('product.deleteItemCart', ['id' => $product['item']['id']])}}"></a>
                                     <div class="ps-cart-item__thumbnail">
-                                        <a href="product-detail.html"></a><img src="images/cake/img-cake-1.jpg" alt=""></div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
+                                        <a href="product/{{$product['item']['id']}}"></a><img src="upload/products/{{$product['item']['image']}}" alt=""></div>
+                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product/{{$product['item']['id']}}">{{$product['item']['name']}}</a>
+                                        <p><span>Quantity:<i>{{$product['qty']}}</i></span></p>
+                                        <p><span>Total:<i>
+                                        @if($product['item']['promote_price'] == 0)
+                                        {{$product['qty']}}*{{$product['item']['unit_price']}}
+                                        @else
+                                        {{$product['qty']}}*{{$product['item']['promote_price']}}
+                                        @endif
+                                        </i></span></p>
                                     </div>
                                 </div>
-                                <div class="ps-cart-item">
-                                    <a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail">
-                                        <a href="product-detail.html"></a><img src="images/cake/img-cake-2.jpg" alt=""></div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item">
-                                    <a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail">
-                                        <a href="product-detail.html"></a><img src="images/cake/img-cake-3.jpg" alt=""></div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="ps-cart__total">
-                                <p>Number of items:<span>36</span></p>
-                                <p>Item Total:<span>£528.00</span></p>
+                                <p>Number of items:<span>{{Session('cart')->totalQty}}</span></p>
+                                <p>Item Total:<span>{{Session('cart')->totalPrice}}</span></p>
                             </div>
-                            <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag" href="cart.html">View bag</a></div>
+                            <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag" href="viewcart">View Cart</a></div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -36,6 +36,7 @@
                                     <option value="5">5</option>
                                 </select>
                                 <p class="ps-product__price">{{$product->unit_price . ' vnd'}}</p>
+                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         @endforeach
@@ -60,7 +61,8 @@
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
                                         <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}
-                                    </p><a class="ps-btn ps-btn--xs" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
+                                    </p>
+                                    <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +82,7 @@
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
                                     <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}
-                                    </p><a class="ps-btn ps-btn--xs" href="cart.html">Order now<i class="fa fa-angle-right"></i></a>
+                                    </p><a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>

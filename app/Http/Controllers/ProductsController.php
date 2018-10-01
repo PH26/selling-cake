@@ -38,7 +38,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $formInput=$request->except('image');
+        $formInput = $request->except('image');
 
 //        validation
         $this->validate($request,[
@@ -52,7 +52,7 @@ class ProductsController extends Controller
         if($image){
             $imageName = $image->getClientOriginalName();
             $image->move('upload/products',$imageName);
-            $formInput['image']=$imageName;
+            $formInput['image'] = $imageName;
         }
 
         Product::create($formInput);

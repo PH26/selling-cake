@@ -79,6 +79,7 @@
     <script type="text/javascript" src="frontend/plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
     <!-- Custom scripts-->
     <script type="text/javascript" src="frontend/js/main.js"></script>
+    <script type="text/javascript" src="frontend/js/cart.js"></script>
 </body>
 
 </html>
