@@ -16,6 +16,7 @@ Route::get('/', 'PageController@homepage');
 Route::get('allproduct', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
+//Add to cart and Order
 Route::get('add-to-cart/{id}', [
 			'uses' => 'PageController@getAddToCart',
 			'as' => 'product.addToCart'
@@ -25,7 +26,11 @@ Route::get('delete-item-cart/{id}', [
 			'as' => 'product.deleteItemCart'
 			]);
 Route::get('viewcart', 'PageController@getViewCart');
-Route::post('changeQty/{id}/{qty}', ['as' => 'changeQty', 'uses' => 'PageController@changeQty']);
+Route::get('cart/changeQty', ['as' => 'changeQty', 'uses' => 'PageController@changeQty']);
+Route::get('checkout', 'OrderController@getCheckOut');
+Route::post('checkout', 'OrderController@postCheckOut');
+//Management for User
+Route::get('user/profile', 'PageController@userProfile');
 
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
@@ -84,12 +89,20 @@ Route::group(['prefix' => 'admin'], function(){
 	});
 });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-//Login/Logout
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('login', 'Auth\LoginController@login');
+//Login/Logout for Admin
+Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('admin/login', 'Auth\AdminLoginController@login');
+Route::get('admin/logout', 'Auth\AdminLoginController@logout');
+//Login/Logout for Normal User
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('page.login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');
 // Registration Routes...
-$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('register', 'Auth\RegisterController@register');
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm');
+Route::post('signup', 'Auth\RegisterController@register');
+Route::get('/user/activation/{token}', 'Auth\RegisterController@userActivation');
 
+
+Route::get('contact', 'PageController@getContact')->name('contact');
+Route::post('contact', 'PageController@postContact')->name('contact');

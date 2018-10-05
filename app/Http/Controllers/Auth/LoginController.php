@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -38,21 +38,54 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+
     public function showLoginForm()
     {
-        return view('auth.login');
+            return view('frontend.pages.login');
     }
+
     public function login(LoginRequest $request)
     {
         $login = [
             'email' => $request->email,
             'password' => $request->password,
-            'role' => 1
+            'role' => 0
         ];
         if(Auth::attempt($login)){
-            return redirect('admin/user/index');
+                return redirect('user/profile');
         } else {
-            return redirect()->back();
+            return redirect()->back()->with('notification', 'Please re-enter password');
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login');
+    }
+
+     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    function authenticated(Request $request, $user)
+    {
+    if ( !$user->active ) {
+        auth()->logout();
+        return back()->withErrors(['email' => 'Your account is not activated yet, please verify your Account.']);
+    }
+
+    return redirect()->intended($this->redirectPath());
+}
 }

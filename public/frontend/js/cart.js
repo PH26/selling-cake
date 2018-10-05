@@ -4,14 +4,17 @@ $(document).ready(function(){
         var qty = $(this).val();
         var token = $("input[name='_token']").val();
         $.ajax({
-            url:'changeQty/' + id + '/' + qty,
-            type:'POST',
-            cache:false,
-            data:{"_token":token, "id":id, "qty":qty},
+            url:'cart/changeQty?id='+id+'&qty='+qty,
+            type:'GET',
+            cache:true,
+            dataType: 'json',
             success: function(data){
                 if(data == 'ok'){
-                    window.location = 'viewcart'
+                    window.location = 'viewcart';
                 }
+            },
+            error: function(err){
+                alert('ddd');
             }
         });
     });
