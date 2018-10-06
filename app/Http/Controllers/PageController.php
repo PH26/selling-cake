@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Slide;
@@ -10,24 +12,16 @@ use App\Product;
 use App\User;
 use App\Cart;
 use Session;
+use Mail;
 
 class PageController extends Controller
 {
-    function __construct()
-    {
-        $categories = Category::all();
-        $slides = Slide::all();
-        $bestsellers = Product::where('promote_price', '<>', 0)->take(4)->get();
-        // $searchProducts = Product::where('name', 'like', "%$keyword%")->take(4)->get();
-        view()->share('categories', $categories);
-        view()->share('slides', $slides);
-        view()->share('bestsellers', $bestsellers);
-    }
 
     public function homepage()
     {
+        $slides = Slide::all();
         $products = Product::where('promote_price', '<>', 0)->take(4)->get();
-        return view('frontend.pages.homepage',compact('products'));
+        return view('frontend.pages.homepage',compact('products', 'slides'));
     }
 
     public function allProduct()
@@ -77,19 +71,64 @@ class PageController extends Controller
         return view('frontend.pages.cart');
     }
 
-    public function changeQty(Request $request, $id, $qty)
+    // public function changeQty(Request $request)
+    // {
+
+    //     if($request->ajax()){
+    //         \Log::info('message'.$request->get('id').'qty'.$request->get('qty'));
+
+    //         $id = $request->get('id');
+    //         $qty = $request->get('qty');
+    //         $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    //     \Log::info('message'.$request->get('id').'qty'.$request->get('qty').'cart'.json_encode($oldCart));
+
+    //         if(empty($oldCart)){
+    //             \Log::info('not have sess');
+    //         }
+    //         // dd($oldCart);exit();
+    //         // if (empty($oldCart)) {
+    //         //     return json_encode(['not ok']);
+    //         // } else {
+    //         //     return json_encode($oldCart);
+    //         // }
+    //         // dd(Session::has('cart'), $oldCart);
+
+    //         $cart = new Cart($oldCart);
+    //         $cart->update($id, $qty);
+    //         $request->session()->put('cart', $cart);
+    //         // return redirect()->back();
+    //         return json_encode(['ok']);
+    //     }
+    // }
+
+    public function showLoginForm()
     {
-        if($request->ajax()){
-            $id = Request::get('id');
-            $qty = Request::get('qty');
-            $oldCart = Session::has('cart') ? Session::get('cart') : null;
-            $cart = new Cart($oldCart);
-            $cart->removeItem($id);
-            if(count($cart->items) > 0){
-                Session::put(['cart' =>  $cart, 'id' => $id, 'qty' => $qty]);
-            }
+            return view('frontend.pages.login');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $login = [
+            'email' => $request->email,
+            'password' => $request->password,
+            // 'role' => 0
+        ];
+        if(Auth::attempt($login)){
+            return redirect('user/profile');
+        } else {
             return redirect()->back();
-            echo 'ok';
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login');
+    }
+
+    public function userProfile()
+    {
+        return view('frontend.users.profile');
+    }
+
 }

@@ -52,28 +52,34 @@ class Cart extends Model
 
 	public function update($id, $qty)
     {
-        $item = $this->get($id);
+		// $item = $this->get($id);
 
+		// $a=$this->items[1]->promote_price;
         if($this->items){
 			if(array_key_exists($id, $this->items)){
 				$storedItem = $this->items[$id];
 			}
 		}
-		$storedItem['qty'] += $qty;
-		if($item->promote_price == 0){
-			$storedItem['price'] = $item->unit_price * $storedItem['qty'];
+		$storedItem['qty'] = $qty;
+		if($storedItem->promote_price == 0){
+			$storedItem['price'] = $storedItem->unit_price * $storedItem['qty'];
 		}
 		else{
-			$storedItem['price'] = $item->promote_price * $storedItem['qty'];
+			$storedItem['price'] = $storedItem->promote_price * $storedItem['qty'];
 		}
 		$this->items[$id] = $storedItem;
 		$this->totalQty++;
-		if($item->promote_price == 0){
-			$this->totalPrice += $item->unit_price;
+		$totalNew=0;
+		foreach($this->items as $item){
+			if($item->promote_price == 0){
+				$totalNew += $item->unit_price * $storedItem['qty'];
+			}
+			else{
+				$totalNew += $item->promote_price * $storedItem['qty'];
+			}
 		}
-		else{
-			$this->totalPrice += $item->promote_price;
-		}
+		$this->totalPrice= $totalNew;
+
 
 	}
 

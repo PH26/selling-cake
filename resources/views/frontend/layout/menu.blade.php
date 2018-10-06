@@ -18,15 +18,53 @@
                 <a class="ps-logo" href="index.html"><img src="images/logo-1.png" alt=""></a>
                 <div class="navigation__right">
                     <ul class="menu menu--right">
-                        <li class=""><a href="#">Contact</a></li>
+                        <li class=""><a href="contact">Contact</a></li>
+                    </ul>
+                    @if(!Auth::check())
+                    <ul class="menu menu--right">
+                        <li class=""><a href="login">Login</a></li>
                     </ul>
                     <ul class="menu menu--right">
-                        <li class=""><a href="#">Login</a></li>
+                        <li class=""><a href="signup">Signup</a></li>
                     </ul>
-                    <ul class="menu menu--right">
-                        <li class=""><a href="#">Signup</a></li>
-                    </ul>
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>
+                    @else
+                    <li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="admin_asset/images/avatars/user.jpg" alt="Jason's Photo" />
+								<span class="user-info">
+									<small>Welcome,
+									{{Auth::user()->name}}</small>
+								</span>
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="#">
+										<i class="ace-icon fa fa-cog"></i>
+										Settings
+									</a>
+								</li>
+
+								<li>
+									<a href="user/profile">
+										<i class="ace-icon fa fa-user"></i>
+										Profile
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="logout">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+                    @endif
+                    <div class="ps-cart"><a class="ps-cart__toggle" href="viewcart"><span><i>
                         @if(Session::has('cart'))
                             {{Session('cart')->totalQty}}
                         @else

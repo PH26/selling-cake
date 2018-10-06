@@ -79,7 +79,8 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                                 <div class="ps-cart__total">
                                     <p>Total Price: <span>{{Session('cart')->totalPrice}}</span></p>
-                                    <button class="ps-btn ps-btn--sm ps-btn--fullwidth">Process to checkout</button>
+                                    <a href="checkout">
+                                    <button class="ps-btn ps-btn--sm ps-btn--fullwidth" >Process to checkout</button></a>
                                 </div>
                             </div>
                         </div>

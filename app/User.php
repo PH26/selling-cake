@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'phone', 'role', 'active'
+        'name', 'email', 'password', 'address', 'phone', 'role', 'active','activation_code'
     ];
 
     /**
@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Rating');
     }
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
+
 }

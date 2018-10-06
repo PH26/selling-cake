@@ -25,14 +25,14 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Name</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" name='name' placeholder="Username" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name='name' placeholder="Name" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Email</label>
 
 										<div class="col-sm-9">
-											<input type="email" id="form-field-1" name='email'placeholder="Email" class="col-xs-10 col-sm-5" />
+											<input type="email" id="form-field-1" name='email' placeholder="Email" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 

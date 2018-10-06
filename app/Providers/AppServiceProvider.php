@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Cart;
 use Session;
+use App\Category;
+use App\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function ($view) {
+            $categories = Category::all();
+            $view->with('categories', $categories);
+            $bestsellers = Product::where('promote_price', '<>', 0)->take(4)->get();
+            $view->with('bestsellers', $bestsellers);
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
