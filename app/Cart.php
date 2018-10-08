@@ -50,32 +50,32 @@ class Cart extends Model
 
 	}
 
-	public function update($id, $qty)
-    {
-        $item = $this->get($id);
+	// public function update($id, $qty)
+ //    {
+ //        $item = $this->get($id);
 
-        if($this->items){
-			if(array_key_exists($id, $this->items)){
-				$storedItem = $this->items[$id];
-			}
-		}
-		$storedItem['qty'] += $qty;
-		if($item->promote_price == 0){
-			$storedItem['price'] = $item->unit_price * $storedItem['qty'];
-		}
-		else{
-			$storedItem['price'] = $item->promote_price * $storedItem['qty'];
-		}
-		$this->items[$id] = $storedItem;
-		$this->totalQty++;
-		if($item->promote_price == 0){
-			$this->totalPrice += $item->unit_price;
-		}
-		else{
-			$this->totalPrice += $item->promote_price;
-		}
+ //        if($this->items){
+	// 		if(array_key_exists($id, $this->items)){
+	// 			$storedItem = $this->items[$id];
+	// 		}
+	// 	}
+	// 	$storedItem['qty'] += $qty;
+	// 	if($item->promote_price == 0){
+	// 		$storedItem['price'] = $item->unit_price * $storedItem['qty'];
+	// 	}
+	// 	else{
+	// 		$storedItem['price'] = $item->promote_price * $storedItem['qty'];
+	// 	}
+	// 	$this->items[$id] = $storedItem;
+	// 	$this->totalQty++;
+	// 	if($item->promote_price == 0){
+	// 		$this->totalPrice += $item->unit_price;
+	// 	}
+	// 	else{
+	// 		$this->totalPrice += $item->promote_price;
+	// 	}
 
-	}
+	// }
 
 	//Delete a product
 	public function reduceByOne($id){
