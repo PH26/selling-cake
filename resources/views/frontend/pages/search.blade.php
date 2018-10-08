@@ -1,22 +1,66 @@
 @extends('frontend.layout.index')
 @section('content')
-
+<!-- <div class="ps-section--page">
+@include('frontend.layout.slide')
+<section class="ps-section ps-section--list-product pt-40 pb-80">
+    <div class="container">
+        <div class="ps-section__header text-center mb-50">
+            <h4 class="ps-section__top">Sweet Cupcakes</h4>
+            <h3 class="ps-section__title ps-section__title--full">FIND CAKE</h3>
+        </div>
+        <div class="ps-section__content">
+            <div class="owl-slider owl-slider--best-seller" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="30" data-owl-nav="true" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-nav-left="&lt;i class=&quot;ps-icon--back&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;ps-icon--next&quot;&gt;&lt;/i&gt;">
+                @foreach($product as $new)
+                <div class="ps-product">
+                    <div class="ps-product__thumbnail">
+                        <div class="ps-badge"><span>-50%</span></div>
+                        <a class="ps-product__overlay" href="products/{{count($product)}}"></a><img src="upload/products/{{$new->image}}"  height= '220.27px' alt="">
+                        <ul class="ps-product__action">
+                            <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
+                            <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
+                            <li><a href="#" data-tooltip="Compare"><i class="ps-icon--reload"></i></a></li>
+                            <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="ps-product__content"><a class="ps-product__title" href="product/{{$new->id}}">{{$new->name}}</a>
+                        <div class="ps-product__category"><a class="ps-product__category" href="category/{{$new->categories->id}}">{{$new->categories->name}}</a>
+                        </div>
+                        <select class="ps-rating">
+                            <option value="1">1</option>
+                            <option value="1">2</option>
+                            <option value="1">3</option>
+                            <option value="1">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <p class="ps-product__price">{{$new->unit_price . ' vnd'}}</p>
+                        <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $new->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+  </section>
+</div> -->
 <div class="page-wrap">
 
-@include('frontend.layout.section')
 <div class="ps-section--page">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
                         <div class="ps-shop-grid pt-80">
                             <div class="ps-shop-features">
+                              <div class="ps-section__header text-center mb-50">
+                                  <h4 class="ps-section__top">Sweet Cupcakes</h4>
+                                  <h3 class="ps-section__title ps-section__title--full">FIND CAKE</h3>
+                              </div>
                                 <div class="row">
-                                    @foreach($products as $product)
+                                    @foreach($product as $new)
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                                         <div class="ps-product">
                                             <div class="ps-product__thumbnail">
                                                 <!-- <div class="ps-badge ps-badge--new"><span>New</span></div> -->
-                                                <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}" height= '220.27px'alt="">
+                                                <a class="ps-product__overlay" href="product-detail.html"></a><img src="upload/products/{{$new->image}}" height= '220.27px'alt="">
                                                 <ul class="ps-product__action">
                                                     <li><a class="popup-modal" href="#quickview-modal" data-effect="mfp-zoom-out" data-tooltip="View"><i class="ps-icon--search"></i></a></li>
                                                     <li><a href="#" data-tooltip="Add to wishlist"><i class="ps-icon--heart"></i></a></li>
@@ -24,9 +68,8 @@
                                                     <li><a href="#" data-tooltip="Add to cart"><i class="ps-icon--shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <div class="ps-product__content"><a class="ps-product__title" href="product/{{$product->id}}">{{$product->name}}</a>
-                                                <div class="ps-product__category"><a class="ps-product__category" href="category/{{$product->categories->id}}">{{$product->categories->name}}</a>
-                                                </div>
+                                            <div class="ps-product__content"><a class="ps-product__title" href="product/{{$new->id}}">{{$new->name}}</a>
+
                                                 <select class="ps-rating">
                                                     <option value="1">1</option>
                                                     <option value="1">2</option>
@@ -34,74 +77,27 @@
                                                     <option value="1">4</option>
                                                     <option value="5">5</option>
                                                 </select>
-                                                <p class="ps-product__price">{{$product->unit_price . ' vnd'}}</p>
-                                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                                                <p class="ps-product__price">{{$new->unit_price . ' vnd'}}</p>
+                                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $new->id])}}">Order now<i class="fa fa-angle-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     @endforeach
                                 </div>
-                                <div class="ps-pagination">
-                                    <ul class="pagination">
-                                        <!-- Previous Page Link -->
-                                            @if ($products->onFirstPage())
-                                                <li class="disabled"><span>&laquo;</span></li>
-                                            @else
-                                                <li><a href="{{ $products->previousPageUrl() }}" rel="prev">&laquo;</a></li>
-                                            @endif
 
-                                            <!-- Pagination Elements -->
-                                            @foreach ($products as $product)
-                                                <!-- "Three Dots" Separator -->
-                                                @if (is_string($product))
-                                                    <li class="disabled"><span>{{ $product }}</span></li>
-                                                @endif
-
-                                                <!-- Array Of Links -->
-                                                @if (is_array($product))
-                                                    @foreach ($product as $page => $url)
-                                                        @if ($page == $product->currentPage())
-                                                            <li class="active"><span>{{ $page }}</span></li>
-                                                        @else
-                                                            <li><a href="{{ $url }}">{{ $page }}</a></li>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-
-                                            <!-- Next Page Link -->
-                                            @if ($products->hasMorePages())
-                                                <li><a href="{{ $products->nextPageUrl() }}" rel="next">&raquo;</a></li>
-                                            @else
-                                                <li class="disabled"><span>&raquo;</span></li>
-                                            @endif
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-pull-9 col-md-pull-9">
                         <div class="ps-sidebar">
-                            <aside class="ps-widget ps-widget--sidebar ps-widget--search">
-                                <form method="post" action="search-result.html">
-                                    <input class="form-control" id='product_name' type="text" placeholder="Type here bakery name...">
+                          <aside class="ps-widget ps-widget--sidebar ps-widget--search">
+                                <form method="get" action="{{route('search')}}">
+                                  {{ csrf_field() }}
+                                    <input name="key" id="product_name" class="form-control product_name" type="text" placeholder="Type here bakery name...">
                                     <button type="submit"><i class="ps-icon--search"></i></button>
+                                    <div class="dropdown-menu" id="productList"></div>
                                 </form>
-                            </aside>
-                            <aside class="ps-widget ps-widget--sidebar ps-widget--category">
-                                <div class="ps-widget__header">
-                                    <h3 class="ps-widget__title">CATEGORY</h3>
-                                </div>
-                                <div class="ps-widget__content">
-                                    <ul class="ps-list--circle">
-                                        <li class="current">
-                                        <a href="allproduct"><span  id="0" class="circle"></span>All category </a></li>
-                                        @foreach($categories as $category)
-                                        <li><a href="category/{{$category->id}}"><span id="{{$category->id}}" class="circle "></span>{{$category->name}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </aside>
+                          </aside>
                             <aside class="ps-widget ps-widget--sidebar ps-widget--filter">
                                 <div class="ps-widget__header">
                                     <h3 class="ps-widget__title">Fillter Prices</h3>
@@ -152,45 +148,4 @@
         </div>
 
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var span_select = $(".circle");
-        for(var i = 0; i < span_select.length; i++){
-            var category_id = parseInt(span_select[i].id);
-            var current = window.location.pathname;
-            var id = current.split("/")[2];
-            if (id == category_id){
-                $("#" + category_id).parent().parent().attr('class',' current' );
-            } else {
-                $("#" + category_id).parent().parent().removeClass('current' );
-            }
-        }
-    })
-</script>
-//Script for search
-<script type="text/javascript">
-$('#product_name').keyup(function(){
-       var query = $(this).val();
-       if(query != '')
-       {
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-         url:"{{ route('product.fetch') }}",
-         method:"POST",
-         data:{query:query, _token:_token},
-         success:function(data){
-          $('#productList').fadeIn();
-                   $('#productList').html(data);
-         }
-        });
-       }
-   });
-
-   $(document).on('click', 'li', function(){
-       $('#product_name').val($(this).text());
-       $('#productList').fadeOut();
-   });
-
-});
-</script>
 @endsection

@@ -24,9 +24,13 @@ Route::get('delete-item-cart/{id}', [
 			'uses' => 'PageController@getDeleteItemCart',
 			'as' => 'product.deleteItemCart'
 			]);
-Route::get('viewcart', 'PageController@getViewCart');
+Route::post('viewcart', 'PageController@getViewCart');
 Route::post('changeQty/{id}/{qty}', ['as' => 'changeQty', 'uses' => 'PageController@changeQty']);
 
+Route::get('search',[
+	'as' => 'search',
+	'uses' => 'PageController@getSearch'
+		]);
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){
 	Route::group(['prefix' => 'user'], function(){
@@ -65,6 +69,10 @@ Route::group(['prefix' => 'admin'], function(){
 		Route::post('edit/{id}', 'ProductsController@update');
 
 		Route::get('delete/{id}', 'ProductsController@destroy');
+
+		Route::post('fetch', 'ProductsController@fetch')->name('product.fetch');
+
+
 	});
 	Route::group(['prefix' => 'slide'], function(){
 
@@ -92,4 +100,3 @@ $this->post('login', 'Auth\LoginController@login');
 // Registration Routes...
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('register', 'Auth\RegisterController@register');
-

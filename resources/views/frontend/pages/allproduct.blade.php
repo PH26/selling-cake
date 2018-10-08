@@ -82,12 +82,14 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-pull-9 col-md-pull-9">
                         <div class="ps-sidebar">
-                            <aside class="ps-widget ps-widget--sidebar ps-widget--search">
-                                <form method="post" action="search-result.html">
-                                    <input class="form-control" type="text" placeholder="Type here bakery name...">
+                          <aside class="ps-widget ps-widget--sidebar ps-widget--search">
+                                <form method="get" action="{{route('search')}}">
+                                    <input name="key" id="product_name" class="form-control product_name" type="text" placeholder="Type here bakery name...">
                                     <button type="submit"><i class="ps-icon--search"></i></button>
+                                    <div class="dropdown-menu" id="productList"></div>
                                 </form>
-                            </aside>
+                          </aside>
+                          {{ csrf_field() }}
                             <aside class="ps-widget ps-widget--sidebar ps-widget--category">
                                 <div class="ps-widget__header">
                                     <h3 class="ps-widget__title">CATEGORY</h3>

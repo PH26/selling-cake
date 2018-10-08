@@ -92,4 +92,9 @@ class PageController extends Controller
             echo 'ok';
         }
     }
+    public function getSearch(Request $req){
+        $product = Product::where('name','like','%'.$req->key.'%')
+                      -> get();
+        return view('frontend.pages.search',compact('product'));
+    }
 }

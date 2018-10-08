@@ -9,7 +9,7 @@
 								<div class="alert alert-success">
 									{{session('notification')}}
 								</div>
-                        	@endif
+              	@endif
 							<div class="hr hr-18 dotted hr-double"></div>
 
 							<div class="row">
@@ -29,7 +29,7 @@
 												</thead>
 
 												<tbody>
-													
+
 													<tr>
 														<td class="center">aa</td>
 														<td class="center">bbb</td>
@@ -72,7 +72,7 @@
 														</td>
 
 													</tr>
-												  
+
 												</tbody>
 											</table>
 										</div>
