@@ -22,13 +22,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', $categories);
             $bestsellers = Product::where('promote_price', '<>', 0)->take(4)->get();
             $view->with('bestsellers', $bestsellers);
-            if(Session('cart')){
-                $oldCart = Session::get('cart');
-                $cart = new Cart($oldCart);
-                $view->with(['cart' => Session::get('cart'),
-                             'product_cart' => $cart->items,
-                             'totalPrice' => $cart->totalPrice,           'totalQty' => $cart->totalQty]);
-            }
         });
     }
 

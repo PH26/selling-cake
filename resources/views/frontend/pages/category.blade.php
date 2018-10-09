@@ -35,7 +35,7 @@
                                                     <option value="5">5</option>
                                                 </select>
                                                 <p class="ps-product__price">{{$product->unit_price . ' vnd'}}</p>
-                                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                                                <a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$product->id])!!}">Order now<i class="fa fa-angle-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -124,25 +124,10 @@
                                             <h4 class="ps-product__title"><a href="product/{{$bestseller->id}}">{{$bestseller->name}}</a></h4>
                                             <p class="ps-product__price">
                                                 <del>{{$bestseller->unit_price . ' vnd'}}</del>{{$bestseller->promote_price . ' vnd'}}
-                                            </p><a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $bestseller->id])}}">Order Now</a>
+                                            </p><a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$bestseller->id])!!}">Order Now</a>
                                         </div>
                                         @endforeach
                                     </div>
-                                </div>
-                            </aside>
-                            <aside class="ps-widget ps-widget--sidebar ps-widget--tags">
-                                <div class="ps-widget__header">
-                                    <h3 class="ps-widget__title">TAGS</h3>
-                                </div>
-                                <div class="ps-widget__content">
-                                    <ul class="ps-tags">
-                                        <li><a href="#">Cupcake</a></li>
-                                        <li><a href="#">vanila</a></li>
-                                        <li><a href="#">sugar flower</a></li>
-                                        <li><a href="#">vanila</a></li>
-                                        <li><a href="#">coconut</a></li>
-                                        <li><a href="#">vanila</a></li>
-                                    </ul>
                                 </div>
                             </aside>
                         </div>

@@ -10,7 +10,8 @@ use App\Slide;
 use App\Category;
 use App\Product;
 use App\User;
-use App\Cart;
+use App\Order;
+use Cart;
 use Session;
 use Mail;
 
@@ -42,27 +43,18 @@ class PageController extends Controller
         return view('frontend.pages.product',compact('products'));
     }
     //Function for Cart
-    public function getAddToCart(Request $request, $id)
+    public function getAddToCart($id)
     {
-        $product = Product::find($id);
-        $oldCart = Session('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
-        $request->session()->put('cart', $cart);
+        $product = Product::where('id', $id)->first();
+        $cart = Cart::add(['id' => $id, 'name' => $product->name, 'qty' => 1,
+                    'price' => $product->promote_price == 0 ?   $product->unit_price : $product->promote_price ,
+                     'options' => ['image' => $product->image]]);
         return redirect()->back();
     }
 
     public function getDeleteItemCart($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->removeItem($id);
-        if(count($cart->items) > 0){
-            Session::put('cart', $cart);
-        }
-        else{
-            Session::forget('cart');
-        }
+        Cart::remove($id);
         return redirect()->back();
     }
 
@@ -71,59 +63,14 @@ class PageController extends Controller
         return view('frontend.pages.cart');
     }
 
-    // public function changeQty(Request $request)
-    // {
-
-    //     if($request->ajax()){
-    //         \Log::info('message'.$request->get('id').'qty'.$request->get('qty'));
-
-    //         $id = $request->get('id');
-    //         $qty = $request->get('qty');
-    //         $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    //     \Log::info('message'.$request->get('id').'qty'.$request->get('qty').'cart'.json_encode($oldCart));
-
-    //         if(empty($oldCart)){
-    //             \Log::info('not have sess');
-    //         }
-    //         // dd($oldCart);exit();
-    //         // if (empty($oldCart)) {
-    //         //     return json_encode(['not ok']);
-    //         // } else {
-    //         //     return json_encode($oldCart);
-    //         // }
-    //         // dd(Session::has('cart'), $oldCart);
-
-    //         $cart = new Cart($oldCart);
-    //         $cart->update($id, $qty);
-    //         $request->session()->put('cart', $cart);
-    //         // return redirect()->back();
-    //         return json_encode(['ok']);
-    //     }
-    // }
-
-    public function showLoginForm()
+    public function changeQty(Request $request)
     {
-            return view('frontend.pages.login');
-    }
-
-    public function login(LoginRequest $request)
-    {
-        $login = [
-            'email' => $request->email,
-            'password' => $request->password,
-            // 'role' => 0
-        ];
-        if(Auth::attempt($login)){
-            return redirect('user/profile');
-        } else {
-            return redirect()->back();
+        if ($request->ajax()){
+            $id = $request->get('id');
+            $qty = $request->get('qty');
+            Cart::update($id, $qty);
+            echo 'ok';
         }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('login');
     }
 
     public function userProfile()
@@ -131,4 +78,21 @@ class PageController extends Controller
         return view('frontend.users.profile');
     }
 
+    public function changeUserProfile(Request $request,$id)
+    {
+        request()->validate([
+            'email' => 'email|unique:users,email',
+            'phone' => 'numeric',
+            'confirm_password' => 'same:password'
+            ]);
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->back()->with('notification','Your profile is saved');
+    }
+
+    public function userOrder()
+    {
+        $orders= Order::with(['orderDetails.products'])->get();
+        return view('frontend.users.order', compact('orders'));
+    }
 }

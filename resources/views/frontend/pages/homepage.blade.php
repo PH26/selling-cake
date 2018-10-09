@@ -35,8 +35,8 @@
                                     <option value="1">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <p class="ps-product__price">{{$product->unit_price . ' vnd'}}</p>
-                                <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                                <p class="ps-product__price">{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</p>
+                                <a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$product->id])!!}">Order now<i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         @endforeach
@@ -60,9 +60,9 @@
                                     <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
-                                        <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}
+                                        <del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
                                     </p>
-                                    <a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                                    <a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$product->id])!!}">Order now<i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                                     <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                                     <p>{{$product->description}}</p>
                                     <p class="ps-product__price">
-                                    <del>{{$product->unit_price . ' vnd'}}</del>{{$product->promote_price . ' vnd'}}
-                                    </p><a class="ps-btn ps-btn--xs" href="{{route('product.addToCart', ['id' => $product->id])}}">Order now<i class="fa fa-angle-right"></i></a>
+                                    <del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
+                                    </p><a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$product->id])!!}">Order now<i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>

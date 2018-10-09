@@ -39,6 +39,7 @@ class UsersController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'numeric',
             'password' => 'required',
             'confirm_password' => 'required|same:password'
             ]);

@@ -78,7 +78,6 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
-                            @if(Session::has('cart'))
                             <div class="ps-checkout__order">
                                 <h3>Your Order</h3>
                                 <table class="table">
@@ -88,16 +87,12 @@
                                             <th class="text-uppercase">Total</th>
                                         </tr>
                                     </thead>
-                                    @foreach($product_cart as $product)
+                                    @foreach(Cart::content() as $cart)
                                     <tbody>
                                         <tr>
-                                            <td>{{$product['item']['name']}} x{{$product['qty']}}</td>
+                                            <td>{{$cart->name}} x {{$cart->qty}}</td>
                                             <td>
-                                            @if($product['item']['promote_price'] == 0)
-                                            {{$product['qty']}}*{{$product['item']['unit_price']}}
-                                            @else
-                                            {{$product['qty']}}*{{$product['item']['promote_price']}}
-                                            @endif
+                                            {!!number_format($cart->price*$cart->qty,0,",",".") . ' đ'!!}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -120,7 +115,6 @@
                                 </div>
                                 <button class="ps-btn ps-btn--sm">Place Order</button>
                             </div>
-                            @endif
                         </div>
                     </div>
                 </form>

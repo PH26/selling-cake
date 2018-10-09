@@ -1,16 +1,19 @@
-@extends('admin.layout.index')
+@extends('frontend.layout.index')
 @section('content')
-	<div class="page-header">
-		<h1>
-		Order Manager
-		</h1>
-		<br>
-			@if(session('notification'))
-			<div class="alert alert-success">
-				{{session('notification')}}
-			</div>
-			@endif
-		<div class="row">
+
+<div class="page-wrap">
+
+@include('frontend.layout.section')
+<div class="ps-section--page-reverse">
+        <div class="container">
+          <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+                  <div class="ps-blog-detail pt-80 pb-80">
+                    <div class="ps-post">
+                      <div class="ps-post__header"><a class="ps-post__title" >My Order</a>
+                      </div>
+                      <div class="ps-post__content">
+					  <div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
@@ -71,39 +74,6 @@
 												<i class="ace-icon fa fa-flag bigger-120"></i>
 											</button>
 										</div>
-
-										<!-- <div class="hidden-md hidden-lg">
-											<div class="inline pos-rel">
-												<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-													<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-												</button>
-
-											<ul class="dropdown-menu 		 dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-												<li>
-													<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-														<span class="blue">
-															<i class="ace-icon fa fa-search-plus bigger-120"></i>
-														</span>
-													</a>
-												</li>
-
-												<li>
-													<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-														<span class="green">
-															<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
-
-												<li>
-													<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-														<span class="red">
-															<i class="ace-icon fa fa-trash-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
-											</ul>
-										</div> -->
 									</td>
 								</tr>
 								@foreach($order->orderDetails as $orderDetail)
@@ -164,28 +134,27 @@
 
 				<!-- PAGE CONTENT ENDS -->
 		</div><!-- /.col -->
-	</div><!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                  <div class="ps-sidebar">
+                    <aside class="ps-widget ps-widget--sidebar ps-widget--category">
+                      <div class="ps-widget__header">
+                        <h3 class="ps-widget__title">My Area</h3>
+                      </div>
+                      <div class="ps-widget__content">
+                        <ul class="ps-list--arrow">
+                          <li ><a href="user/profile"><span class="circle"></span>My Profile</a></li>
+                          <li class="current"><a href="user/order"><span class="circle"></span>My Order</a></li>
+                        </ul>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
 </div>
-@endsection
-
-@section('script')
-<script type="text/javascript">
-	jQuery(function($) {
-		$('.show-details-btn').on('click', function(e) {
-			e.preventDefault();
-			var order_id= $(this).attr('id');
-			// console.log(order_id,$('.detail-row').length );
-
-			$('.detail-row').each(function( index ) {
-				$(this).removeClass('open');
-			});
-			$('.order-detail-'+order_id).each(function( index ) {
-				$(this).addClass('open');
-			});
-			// $(this).closest('tr').next().toggleClass('open');
-			// $(this).closest('tr').next().next().next().toggleClass('open');
-			$(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
-		});
-	})
-</script>
 @endsection
