@@ -74,31 +74,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
-        $orderDetails = OrderDetail::all();
-        return view('admin.order', compact('orders', 'orderDetails'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $orders= Order::with(['users','orderDetails.products'])->get();
+        return view('admin.order', compact('orders'));
     }
 
     /**

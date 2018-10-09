@@ -17,20 +17,17 @@ Route::get('allproduct', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
 //Add to cart and Order
-Route::get('add-to-cart/{id}', [
-			'uses' => 'PageController@getAddToCart',
-			'as' => 'product.addToCart'
-			]);
-Route::get('delete-item-cart/{id}', [
-			'uses' => 'PageController@getDeleteItemCart',
-			'as' => 'product.deleteItemCart'
-			]);
+Route::get('add-to-cart/{id}', 'PageController@getAddToCart');
+Route::get('delete-item-cart/{id}','PageController@getDeleteItemCart');
 Route::get('viewcart', 'PageController@getViewCart');
-Route::get('cart/changeQty', ['as' => 'changeQty', 'uses' => 'PageController@changeQty']);
+Route::post('cart/changeQty/{id}/{qty}','PageController@changeQty');
 Route::get('checkout', 'OrderController@getCheckOut');
 Route::post('checkout', 'OrderController@postCheckOut');
 //Management for User
 Route::get('user/profile', 'PageController@userProfile');
+Route::post('user/profile/change/{id}', 'PageController@changeUserProfile');
+Route::get('user/order', 'PageController@userOrder');
+
 
 //Route for admin
 Route::group(['prefix' => 'admin'], function(){

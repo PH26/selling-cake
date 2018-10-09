@@ -28,9 +28,9 @@
                         <li class=""><a href="signup">Signup</a></li>
                     </ul>
                     @else
-                    <li class="light-blue dropdown-modal">
+                    <ul class="menu menu--right">
+                    <li class="dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="admin_asset/images/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,
 									{{Auth::user()->name}}</small>
@@ -39,12 +39,6 @@
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-cog"></i>
-										Settings
-									</a>
-								</li>
 
 								<li>
 									<a href="user/profile">
@@ -63,42 +57,34 @@
 								</li>
 							</ul>
 						</li>
+                        </ul>
                     @endif
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="viewcart"><span><i>
-                        @if(Session::has('cart'))
-                            {{Session('cart')->totalQty}}
-                        @else
-                            0
-                        @endif
+                    <div class="ps-cart">
+                        <a class="ps-cart__toggle" href="viewcart"><span><i>
+                            {{Cart::count()}}
                         </i></span><i class="ps-icon--shopping-cart"></i></a>
-                        @if(Session::has('cart'))
                         <div class="ps-cart__listing">
                             <div class="ps-cart__content">
-                                @foreach($product_cart as $product)
+                                @foreach(Cart::content() as $cart)
                                 <div class="ps-cart-item">
-                                    <a class="ps-cart-item__close" href="{{route('product.deleteItemCart', ['id' => $product['item']['id']])}}"></a>
+                                    <a class="ps-cart-item__close" href="{!!url('delete-item-cart', ['id' => $cart->rowId])!!}"></a>
                                     <div class="ps-cart-item__thumbnail">
-                                        <a href="product/{{$product['item']['id']}}"></a><img src="upload/products/{{$product['item']['image']}}" alt=""></div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product/{{$product['item']['id']}}">{{$product['item']['name']}}</a>
-                                        <p><span>Quantity:<i>{{$product['qty']}}</i></span></p>
-                                        <p><span>Total:<i>
-                                        @if($product['item']['promote_price'] == 0)
-                                        {{$product['qty']}}*{{$product['item']['unit_price']}}
-                                        @else
-                                        {{$product['qty']}}*{{$product['item']['promote_price']}}
-                                        @endif
+                                        <a href="product/{{$cart->id}}"></a><img src="upload/products/{{$cart->options->image}}" alt=""></div>
+                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product/{{$cart->id}}">{{$cart->name}}</a>
+                                        <p><span>Quantity:<i>{{$cart->qty}}</i></span></p>
+                                        <p><span>Item total:<i>
+                                        {!!number_format($cart->price*$cart->qty,0,",",".") . ' đ'!!}
                                         </i></span></p>
                                     </div>
                                 </div>
                                 @endforeach
                             </div>
                             <div class="ps-cart__total">
-                                <p>Number of items:<span>{{Session('cart')->totalQty}}</span></p>
-                                <p>Item Total:<span>{{Session('cart')->totalPrice}}</span></p>
+                                <p>Number of items:<span>{{Cart::count()}}</span></p>
+                                <p>Total:<span>{!!Cart::subtotal(0,",",".") . ' đ'!!}</span></p>
                             </div>
                             <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag" href="viewcart">View Cart</a></div>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>

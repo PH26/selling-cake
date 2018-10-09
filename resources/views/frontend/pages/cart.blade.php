@@ -23,40 +23,32 @@
                             <form method='POST' action=''>
                                 {{ csrf_field() }}
                             <tbody>
-                                @foreach($product_cart as $product)
+                                @foreach(Cart::content() as $cart)
                                 <tr>
                                     <td>
-                                        <div class="ps-product--cart"><img src="upload/products/{{$product['item']['image']}}" alt="">
-                                            <a href="product/{{$product['item']['id']}}">
+                                        <div class="ps-product--cart"><img src="upload/products/{{$cart->options->image}}" alt="">
+                                            <a href="product/{{$cart->id}}">
                                                 <div style='position: relative; bottom: 20px;' >
-                                                {{$product['item']['name']}}
+                                                {{$cart->name}}
                                                 </div>
                                             </a>
                                         </div>
                                     </td>
                                     <td>
-                                        @if($product['item']['promote_price'] == 0)
-                                        {{$product['item']['unit_price']}}
-                                        @else
-                                        {{$product['item']['promote_price']}}
-                                        @endif
+                                    {!!number_format($cart->price,0,",",".") . ' đ' !!}
                                     </td>
                                     <td>
                                         <div class="form-group--number">
                                             <button class="minus"><span>-</span></button>
-                                            <input class="form-control changeQty" type="text" value="{{$product['qty']}}" id="{{$product['item']['id']}}">
+                                            <input class="form-control changeQty" type="text" value="{{$cart->qty}}" id="{{$cart->rowId}}">
                                             <button class="plus"><span>+</span></button>
                                         </div>
                                     </td>
                                     <td><span class="total-row">
-                                    @if($product['item']['promote_price'] == 0)
-                                        {{$product['qty']}}*{{$product['item']['unit_price']}}
-                                        @else
-                                        {{$product['qty']}}*{{$product['item']['promote_price']}}
-                                    @endif
+                                    {!!number_format($cart->price*$cart->qty,0,",",".") . ' đ'!!}
                                     </span></td>
                                     <td>
-                                        <div class="ps-cart-item" style='position: relative;  top: 20px;'><a class="ps-cart-listing__remove" href="{{route('product.deleteItemCart', ['id' => $product['item']['id']])}}"></a></div>
+                                        <div class="ps-cart-item" style='position: relative;  top: 20px;'><a class="ps-cart-listing__remove" href="{!!url('delete-item-cart', ['id' => $cart->rowId])!!}"></a></div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -78,7 +70,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                                 <div class="ps-cart__total">
-                                    <p>Total Price: <span>{{Session('cart')->totalPrice}}</span></p>
+                                    <p>Total Price: <span>{!!Cart::subtotal(0,",",".") . ' đ'!!}</span></p>
                                     <a href="checkout">
                                     <button class="ps-btn ps-btn--sm ps-btn--fullwidth" >Process to checkout</button></a>
                                 </div>
