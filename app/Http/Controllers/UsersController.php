@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Order;
 
 class UsersController extends Controller
 {
@@ -18,8 +19,7 @@ class UsersController extends Controller
         return view('admin.users.index',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
+    /**     
      *
      * @return \Illuminate\Http\Response
      */
@@ -95,7 +95,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = User::find($id);
+        $order = Order::where('user_id', $user->id)->get();
+         if($order->count() > 0){
+            return redirect('admin/user/index')->with('mess','Can not delete user!!!');
+         } else {            
+            User::destroy($id);
         return redirect('admin/user/index')->with('notification','The user deleted successfully');
+         }         
     }
 }

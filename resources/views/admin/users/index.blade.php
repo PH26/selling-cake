@@ -14,6 +14,11 @@
 									{{session('notification')}}
 								</div>
                         	@endif
+                        	@if(session('mess'))
+								<div class="alert alert-danger">
+									{{session('mess')}}
+								</div>
+                        	@endif
 							<div class="hr hr-18 dotted hr-double"></div>
 
 							<div class="row">

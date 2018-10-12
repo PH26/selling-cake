@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-
+use App\Product;
 class CategoriesController extends Controller
 {
     /**
@@ -20,7 +20,7 @@ class CategoriesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -87,8 +87,15 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        Category::destroy($id);
-        return redirect('admin/category/index')->with('notification','The category deleted successfully');
-    }
+    {   
+       
+        $category = Category::find($id);
+        $products = Product::where('category_id', $category->id)->get();
+         if($products->count() > 0){
+            return redirect('admin/category/index')->with('mess','Can not delete categories!!!');
+         } else {            
+           Category::destroy($id);
+            return redirect('admin/category/index')->with('notification','The category deleted successfully');
+         }        
+    }         
 }
