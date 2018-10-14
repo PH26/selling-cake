@@ -11,6 +11,7 @@ use App\Category;
 use App\Product;
 use App\User;
 use App\Order;
+use App\OrderDetail;
 use Cart;
 use Session;
 use Mail;
@@ -48,7 +49,7 @@ class PageController extends Controller
         $product = Product::where('id', $id)->first();
         $cart = Cart::add(['id' => $id, 'name' => $product->name, 'qty' => 1,
                     'price' => $product->promote_price == 0 ?   $product->unit_price : $product->promote_price ,
-                     'options' => ['image' => $product->image]]);
+                    'options' => ['image' => $product->image]]);
         return redirect()->back();
     }
 
@@ -92,7 +93,22 @@ class PageController extends Controller
 
     public function userOrder()
     {
-        $orders= Order::with(['orderDetails.products'])->get();
+        $orders= Auth::user()->orders;
         return view('frontend.users.order', compact('orders'));
+    }
+
+    public function deleteOrder($id)
+    {
+        $orders= Auth::user()->orders;
+        $orderDetails = OrderDetail::all();
+        foreach ($orderDetails as $orderDetail)
+        {
+            if ( !$orderDetail->isCommittedToOrders() )
+            {
+                $orderDetail->delete();
+            }
+        }
+        Order::destroy($id);
+        return redirect('user/order')->with('notification','Your order deleted successfully');
     }
 }

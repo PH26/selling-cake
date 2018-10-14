@@ -117,4 +117,5 @@ class ProductsController extends Controller
         Product::destroy($id);
         return redirect('admin/product/index')->with('notification','The product deleted successfully');
     }
+
 }
