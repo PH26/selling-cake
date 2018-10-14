@@ -46,6 +46,12 @@
 										Profile
 									</a>
 								</li>
+								<li>
+									<a href="user/order">
+										<i class="ace-icon fa fa-user"></i>
+										Order
+									</a>
+								</li>
 
 								<li class="divider"></li>
 

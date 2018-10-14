@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->dateTime('date_order');
             $table->string('note')->nullable();
             $table->string('payment');
+            $table->string('status')->default('Waiting');
             $table->timestamps();
         });
     }

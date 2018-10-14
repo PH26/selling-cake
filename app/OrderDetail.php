@@ -14,6 +14,10 @@ class OrderDetail extends Model
     {
         return $this->belongsTo('App\Order', 'order_id', 'id');
     }
+    public function isCommittedToOrders()
+    {
+        return $this->orders;
+    }
     public function products()
     {
         return $this->belongsTo('App\Product', 'product_id', 'id');

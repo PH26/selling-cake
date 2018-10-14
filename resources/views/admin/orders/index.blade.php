@@ -1,9 +1,7 @@
 @extends('admin.layout.index')
 @section('content')
 	<div class="page-header">
-		<h1>
-		Order Manager
-		</h1>
+		<h1>Order Manager</h1>
 		<br>
 			@if(session('notification'))
 			<div class="alert alert-success">
@@ -29,7 +27,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($orders as $order)
+							@foreach($orders as $order)
 								<tr>
 									<td  class="center">{{$order->id}}</td>
 									<td class="center">
@@ -50,60 +48,20 @@
 									<td  class="center">{{$order->payment}}</td>
 
 									<td  class="center">
-										<span class="label label-sm label-warning">{{$order->status}}</span>
+										<span class="btn btn-white btn-primary">{{$order->status}}</span>
 									</td>
 
-									<td>
-										<div class="hidden-sm hidden-xs btn-group">
-											<button class="btn btn-xs btn-success">
-												<i class="ace-icon fa fa-check bigger-120"></i>
-											</button>
-
-											<button class="btn btn-xs btn-info">
+									<td class="center">
+										<div class="hidden-sm hidden-xs btn-group ">
+											<a href="admin/order/edit/{{$order->id}}"><button class="btn btn-xs btn-info" style='margin-right:10px;'>
 												<i class="ace-icon fa fa-pencil bigger-120"></i>
 											</button>
-
-											<button class="btn btn-xs btn-danger">
+											</a>
+											<a href="admin/order/delete/{{$order->id}}"><button class="btn btn-xs btn-danger">
 												<i class="ace-icon fa fa-trash-o bigger-120"></i>
 											</button>
-
-											<button class="btn btn-xs btn-warning">
-												<i class="ace-icon fa fa-flag bigger-120"></i>
-											</button>
+											</a>
 										</div>
-
-										<!-- <div class="hidden-md hidden-lg">
-											<div class="inline pos-rel">
-												<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-													<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-												</button>
-
-											<ul class="dropdown-menu 		 dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-												<li>
-													<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-														<span class="blue">
-															<i class="ace-icon fa fa-search-plus bigger-120"></i>
-														</span>
-													</a>
-												</li>
-
-												<li>
-													<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-														<span class="green">
-															<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
-
-												<li>
-													<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-														<span class="red">
-															<i class="ace-icon fa fa-trash-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
-											</ul>
-										</div> -->
 									</td>
 								</tr>
 								@foreach($order->orderDetails as $orderDetail)
@@ -151,21 +109,16 @@
 												</div>
 											</div>
 										</td>
-
-										</tr>
-									@endforeach
+									</tr>
 								@endforeach
-
-
-						</tbody>
-					</table>
-				</div><!-- /.span -->
-			</div><!-- /.row -->
-
-				<!-- PAGE CONTENT ENDS -->
-		</div><!-- /.col -->
-	</div><!
-</div>
+							@endforeach
+						    </tbody>
+						</table>
+					</div><!-- /.span -->
+				</div><!-- /.row -->
+			</div><!-- /.col -->
+		</div>
+	</div>
 @endsection
 
 @section('script')
@@ -182,8 +135,6 @@
 			$('.order-detail-'+order_id).each(function( index ) {
 				$(this).addClass('open');
 			});
-			// $(this).closest('tr').next().toggleClass('open');
-			// $(this).closest('tr').next().next().next().toggleClass('open');
 			$(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
 		});
 	})

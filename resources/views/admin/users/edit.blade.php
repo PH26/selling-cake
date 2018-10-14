@@ -43,14 +43,6 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Password </label>
-
-										<div class="col-sm-9">
-											<input type="password" id="form-field-2" name='password' value="{{$user->password}}" placeholder="Password" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Address </label>
 
 										<div class="col-sm-9">

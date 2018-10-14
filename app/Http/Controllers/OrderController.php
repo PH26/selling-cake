@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Category;
 use App\Product;
 use App\User;
-use App\Cart;
+use Cart;
 use App\Order;
 use App\OrderDetail;
 use Session;
@@ -35,35 +36,33 @@ class OrderController extends Controller
 
     public function postCheckOut(Request $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'payment' => 'required',
-            'confirm_password' => 'required|same:password'
+        if (!Auth::check()){
+            return redirect()->back()->with('warning', 'You must login to process checkout');
+        } else {
+            request()->validate([
+                'payment' => 'required',
+                ]);
 
-            ]);
-        $user = new User;
-        $user = User::create($request->only('name', 'password', 'phone', 'address', 'email', 'role', 'active'));
+            $orders = new Order;
+            $orders->user_id = Auth::user()->id;
+            $orders->date_order = date('Y-m-d');
+            $orders->payment = $request->payment;
+            $orders->note = $request->note;
+            $orders->save();
 
-        $orders = new Order;
-        $orders->user_id = $user->id;
-        $orders->date_order = date('Y-m-d');
-        $orders->payment = $request->payment;
-        $orders->note = $request->note;
-        $orders->save();
 
-        $cart = Session::get('cart');
-        foreach ($cart->items as $key => $value) {
-            $oderDetails = new OrderDetail;
-            $oderDetails->order_id = $orders->id;
-            $oderDetails->product_id = $key;
-            $oderDetails->quantity = $value['qty'];
-            $oderDetails->price = ($value['price']/$value['qty']);
-            $oderDetails->save();
+            foreach (Cart::content() as $cart) {
+                $oderDetails = new OrderDetail;
+                $oderDetails->order_id = $orders->id;
+                $oderDetails->product_id = $cart->id;
+                $oderDetails->quantity = $cart->qty;
+                $oderDetails->price = ($cart->price/$cart->qty);
+                $oderDetails->save();
+            }
+            $request->session()->forget('cart');
+            return redirect()->back()->with('notification', 'The order is saved');
         }
-        $request->session()->forget('cart');
-        return redirect()->back()->with('notification', 'The order is saved');
+
 
     }
 
@@ -75,7 +74,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders= Order::with(['users','orderDetails.products'])->get();
-        return view('admin.order', compact('orders'));
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -86,7 +85,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $orders = Order::find($id);
+        return view('admin.orders.edit', compact('orders'));
     }
 
     /**
@@ -98,7 +98,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $changeStatus = Order::find($id);
+        $changeStatus->status = $request->status;
+        $changeStatus->save();
+        return redirect('admin/order/index')->with('notification','The order changed status successfully');
     }
 
     /**
@@ -109,6 +112,16 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $orderDetails = OrderDetail::all();
+        foreach ($orderDetails as $orderDetail)
+        {
+            if ( !$orderDetail->isCommittedToOrders() )
+            {
+                $orderDetail->delete();
+            }
+        }
+        Order::destroy($id);
+        return redirect('admin/order/index')->with('notification','The order deleted successfully');
     }
 }
