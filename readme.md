@@ -2,4 +2,4 @@ Selling Cake project
 
 The project use PHP, MySQL and Laravel framwork
 
-Team: Lam - Hang - Hie
+Team: Lam - Hang - Hieu
