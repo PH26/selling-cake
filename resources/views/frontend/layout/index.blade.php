@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="favicon.png" rel="icon">
+    <link href="frontend/images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="frontend/images/favicon.png" rel="icon">
     <meta name="author" content="#{author}">
     <meta name="keywords" content="#{keyword}">
     <meta name="description" content="#{description}">
-    <title>Bakery | Homepage 1</title>
+    <title>Vanila Bakery</title>
 
     <base href="{{asset('')}}">
     <!-- Fonts-->

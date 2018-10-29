@@ -3,24 +3,24 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-        <title>Form Elements - Ace Admin</title>
+		<link href="frontend/images/favicon.png" rel="icon">
+
+		<title>Vanila Bakery Admin</title>
 
         <base href="{{asset('')}}">
 		<meta name="description" content="Common form elements and layouts" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="admin_asset/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="admin_asset/font-awesome/4.5.0/css/font-awesome.min.css" />
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
 
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="admin_asset/css/jquery-ui.custom.min.css" />
 		<link rel="stylesheet" href="admin_asset/css/chosen.min.css" />
-		<link rel="stylesheet" href="admin_asset/css/bootstrap-datepicker3.min.css" />
-		<link rel="stylesheet" href="admin_asset/css/bootstrap-timepicker.min.css" />
-		<link rel="stylesheet" href="admin_asset/css/daterangepicker.min.css" />
-		<link rel="stylesheet" href="admin_asset/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="admin_asset/css/bootstrap-colorpicker.min.css" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="admin_asset/css/fonts.googleapis.com.css" />
@@ -79,20 +79,8 @@
 		  <script src="admin_asset/js/excanvas.min.js"></script>
 		<![endif]-->
 		<script src="admin_asset/js/jquery-ui.custom.min.js"></script>
-		<script src="admin_asset/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="admin_asset/js/chosen.jquery.min.js"></script>
-		<script src="admin_asset/js/spinbox.min.js"></script>
-		<script src="admin_asset/js/bootstrap-datepicker.min.js"></script>
-		<script src="admin_asset/js/bootstrap-timepicker.min.js"></script>
-		<script src="admin_asset/js/moment.min.js"></script>
-		<script src="admin_asset/js/daterangepicker.min.js"></script>
-		<script src="admin_asset/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="admin_asset/js/bootstrap-colorpicker.min.js"></script>
-		<script src="admin_asset/js/jquery.knob.min.js"></script>
 		<script src="admin_asset/js/autosize.min.js"></script>
-		<script src="admin_asset/js/jquery.inputlimiter.min.js"></script>
 		<script src="admin_asset/js/jquery.maskedinput.min.js"></script>
-		<script src="admin_asset/js/bootstrap-tag.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="admin_asset/js/ace-elements.min.js"></script>
@@ -102,6 +90,7 @@
 		<script src="admin_asset/ckeditor/ckeditor.js"></script>
 
 		@yield('script')
-		@include('admin.layout.footer')
         </body>
+		@include('admin.layout.footer')
+
 </html>

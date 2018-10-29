@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+
 class CategoriesController extends Controller
 {
     /**
@@ -14,13 +15,13 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index',compact('categories'));
+        $cates = Category::orderBy('id', 'DESC')->get();
+        return view('admin.categories.index',compact('cates'));
     }
 
     /**
      * Show the form for creating a new resource.
-     
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required'
+            'name' => 'required|unique:categories,name'
             ]);
         Category::create($request->all());
         return redirect('admin/category/index')->with('notification','The category created successfully');
@@ -75,6 +76,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request,$id)
     {
+        request()->validate([
+            'name' => 'sometimes|required'
+            ]);
         $category = Category::find($id);
         $category->update($request->only('name'));
         return redirect('admin/category/index')->with('notification','The category updated successfully');
@@ -87,15 +91,14 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-       
+    {
         $category = Category::find($id);
-        $products = Product::where('category_id', $category->id)->get();
-         if($products->count() > 0){
-            return redirect('admin/category/index')->with('mess','Can not delete categories!!!');
-         } else {            
+    	$products = Product::where('category_id', $category->id)->get();
+        if ($products->count() > 0){
+            return redirect('admin/category/index')->with('warning', "You can't delete the category!");
+         } else {
            Category::destroy($id);
             return redirect('admin/category/index')->with('notification','The category deleted successfully');
-         }        
-    }         
+           }
+    }
 }

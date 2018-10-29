@@ -36,7 +36,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware(['guest'])->except('logout');
+
     }
 
     /**
@@ -57,12 +58,12 @@ class LoginController extends Controller
         $login = [
             'email' => $request->email,
             'password' => $request->password,
-            'role' => 0
+            'role' => 0,
         ];
         if(Auth::attempt($login)){
                 return redirect('user/profile');
         } else {
-            return redirect()->back()->with('notification', 'Please re-enter password');
+            return redirect()->back()->with('warning', 'Your email or password wrong');
         }
     }
 
@@ -79,13 +80,5 @@ class LoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
-    function authenticated(Request $request, $user)
-    {
-    if ( !$user->active ) {
-        auth()->logout();
-        return back()->withErrors(['email' => 'Your account is not activated yet, please verify your Account.']);
-    }
 
-    return redirect()->intended($this->redirectPath());
-}
 }

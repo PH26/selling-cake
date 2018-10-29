@@ -1,6 +1,8 @@
 @extends('frontend.layout.index')
 @section('content')
-
+<br>
+<br>
+<br>
 <div class="page-wrap">
 <div class="container">
     <div class="row">
@@ -8,11 +10,17 @@
             <div class="panel panel-default">
                 @if (session('warning'))
                         <span class="alert alert-warning help-block">
+                        <button type="button" class="close" data-dismiss="alert">
+                             <i class="ace-icon fa fa-times"></i>
+                        </button>
                             <strong>{{ session('warning') }}</strong>
                         </span>
                 @endif
                 @if(session('notification'))
                     <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button>
                         {{session('notification')}}
                     </div>
                 @endif

@@ -20,9 +20,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $categories = Category::all();
             $view->with('categories', $categories);
-            $bestsellers = Product::where('promote_price', '<>', 0)->take(4)->get();
+            $bestsellers = Product::orderBy('quantity','ASC')->take(4)->get();
             $view->with('bestsellers', $bestsellers);
         });
+
     }
 
     /**
