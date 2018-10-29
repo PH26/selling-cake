@@ -4,19 +4,19 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
                             <h4>ABOUT US</h4>
-                            <p>Te pri oblique ullamcorper, magna persequeris has eu. Mei prompta dolores examad debet suavitate. Pri te vocibus electram. Eu eleifend rationibus vis, at.</p>
-                            <p class="text-uppercase ps-subscribe__highlight">240 CENTRAL PARK, LONDON, OR 10019</p>
+                            <p>Vanila Bakery first started as a family store in 1963 and have since developed into a chain of bakeries all over Da  Nang, Ho Chi Minh City
+                            </p>
+                            <p class="text-uppercase ps-subscribe__highlight">75-77- 79 Phan Dang Luu, Hoa Cuong Nam Ward, Hai Chau District, Da Nang City</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
                             <a class="ps-subscribe__logo" href="index.html"><img src="frontend/images/logo-1.png" alt=""></a>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
-                            <h4>SUBSCRIBE EMAIL</h4>
-                            <p>Give us your email, and we shall send regular updates for new stuff and events.</p>
-                            <form class="ps-subscribe__form" method="post" action="_action">
-                                <input class="form-control" type="text" placeholder="Type your email...">
-                                <button class="ps-btn ps-btn--sm">Subscribe</button>
-                            </form>
+                            <p>With slogan "Fresh everyday", the selected product, distilled from fresh ingredients and special products are manufactured in the day along with our team skilled bakers have many years of experience in pastry techniques.
+                            </p>
+                            <p>
+                            Vanila Bakery is always committed to bring customers the quality products with reasonable prices.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -30,24 +30,24 @@
                             <div class="ps-widget__header">
                                 <h3 class="ps-widget__title">PAYMENTS ACCEPTED</h3>
                             </div>
-                            <div class="ps-widget__content">
+                            <div class="ps-widget__content" style='position: relative; left: 24px;'>
                                 <ul>
                                     <li>
-                                        <a href="#"><img src="frontend/images/payment/1.png" alt=""></a>
+                                        <a><img src="frontend/images/payments/1.png" alt=""></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="frontend/images/payment/2.png" alt=""></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="frontend/images/payment/3.png" alt=""></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="frontend/images/payment/4.png" alt=""></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="frontend/images/payment/5.png" alt=""></a>
+                                        <a><img src="frontend/images/payments/2.png" alt=""></a>
                                     </li>
                                 </ul>
+                                <ul>
+                                    <li>
+                                        <a><img src="frontend/images/payments/3.png" style='width: 68px; height:35px;'></a>
+                                    </li>
+                                    <li>
+                                        <a><img src="frontend/images/payments/4.png" style='width: 68px; height:35px;'></a>
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -69,10 +69,8 @@
                             </div>
                             <div class="ps-widget__content">
                                 <ul class="ps-list--line">
-                                    <li><a href="#">Order</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Policy Return Policy</a></li>
-                                    <li><a href="#">Payments</a></li>
+                                    <li><a href="viewcart">Order</a></li>
+                                    <li><a href="term-and-conditions">Terms and Conditions</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -83,17 +81,16 @@
                                 <h3 class="ps-widget__title">CONNECT US</h3>
                             </div>
                             <div class="ps-widget__content">
-                                <ul class="ps-widget__social">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <ul class="ps-widget__social" style='position:relative; left: 24px;'>
+                                    <li><a ><i class="fa fa-facebook"></i></a></li>
+                                    <li><a ><i class="fa fa-instagram"></i></a></li>
                                 </ul>
-                                <a href="#"><img src="frontend/images/app.jpg" alt=""></a>
-                                <p>@2017 Design by<a href="#"> Alena Studio</a>.</p>
+                                <p>@2017 Design by<a> Alena Studio</a>.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
+
+

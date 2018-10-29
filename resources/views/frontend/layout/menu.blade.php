@@ -3,9 +3,9 @@
                 <div class="menu-toggle"><span></span></div>
                 <div class="navigation__left">
                     <ul class="menu menu--left">
-                        <li class=""><a href="/">Home</a>
+                        <li class=""><a href="homepage">Home</a>
                         </li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="about">About</a></li>
                         <li class="menu-item-has-children"><a href="allproduct">Categories</a>
                             <ul class="sub-menu">
                                 @foreach($categories as $category)
@@ -15,7 +15,7 @@
                         </li>
                     </ul>
                 </div>
-                <a class="ps-logo" href="index.html"><img src="images/logo-1.png" alt=""></a>
+                <a class="ps-logo"><img src="frontend/images/logo-1.png" alt=""></a>
                 <div class="navigation__right">
                     <ul class="menu menu--right">
                         <li class=""><a href="contact">Contact</a></li>
@@ -33,7 +33,8 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<span class="user-info">
 									<small>Welcome,
-									{{Auth::user()->name}}</small>
+									   {{Auth::user()->name}}
+                                    </small>
 								</span>
 								<i class="ace-icon fa fa-caret-down"></i>
 							</a>

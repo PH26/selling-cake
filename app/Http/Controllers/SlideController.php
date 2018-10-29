@@ -14,7 +14,7 @@ class SlideController extends Controller
      */
     public function index()
     {
-        $slides = Slide::all();
+        $slides = Slide::orderBy('id', 'DESC')->get();
         return view('admin.slide.index',compact('slides'));
     }
 
@@ -41,7 +41,6 @@ class SlideController extends Controller
 //        validation
         $this->validate($request,[
             'image'=>'required',
-
         ]);
 //        image upload
         $image = $request->image;
@@ -89,6 +88,10 @@ class SlideController extends Controller
     {
         $slide = Slide::find($id);
         $formInput = $request->except('image');
+
+        $this->validate($request,[
+            'image'=>'sometimes|required',
+        ]);
 
 //        image upload
         $image = $request->image;

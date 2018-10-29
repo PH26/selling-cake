@@ -3,9 +3,24 @@
 
 <div class="page-wrap">
 
-@include('frontend.layout.section')
+<div class="ps-section--hero"><img src="frontend/images/hero/01.jpg" alt="">
+            <div class="ps-section__content text-center">
+                <h3 class="ps-section__title">OUR BAKERY</h3>
+                <div class="ps-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="homepage">Home</a></li>
+                        <li class="active">Cart</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
 <div class="ps-section--cart pt-100 pb-100">
             <div class="container">
+                @if(session('warning'))
+                    <div class="alert alert-warning" data-dismiss="alert">
+                        {!!session('warning')!!}
+                    </div>
+                @endif
                 @if(Session::has('cart'))
                 <div class="ps-cart-listing">
                     <p class="hidden-lg"><i>Slide right to view</i></p>
@@ -39,9 +54,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group--number">
-                                            <button class="minus"><span>-</span></button>
-                                            <input class="form-control changeQty" type="text" value="{{$cart->qty}}" id="{{$cart->rowId}}">
-                                            <button class="plus"><span>+</span></button>
+                                            <input class="form-control changeQty" type="number" value="{{$cart->qty}}" id="{{$cart->rowId}}" style='border-radius: 25px; background: #F9DFDF;'>
                                         </div>
                                     </td>
                                     <td><span class="total-row">
@@ -60,12 +73,10 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
                                 <div class="form-group form-group--icon ps-cart__promotion">
-                                    <div class="icon-wrap"><i class="fa fa-angle-right"></i>
-                                        <input class="form-control" type="text" placeholder="promotion code">
-                                    </div>
+
                                 </div>
                                 <div class="form-groupform-order">
-                                    <button class="ps-cart__shopping">Continue Shopping</button>
+                                    <a href="allproduct"><button class="ps-cart__shopping">Continue Shopping</button></a>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">

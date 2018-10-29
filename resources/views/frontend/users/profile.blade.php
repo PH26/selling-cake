@@ -3,13 +3,28 @@
 
 <div class="page-wrap">
 
-@include('frontend.layout.section')
+<div class="ps-section--hero"><img src="frontend/images/hero/01.jpg" alt="">
+            <div class="ps-section__content text-center">
+                <h3 class="ps-section__title">OUR BAKERY</h3>
+                <div class="ps-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="homepage">Home</a></li>
+                        <li class="active">My Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
 <div class="ps-section--page-reverse">
         <div class="container">
           <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
                   <div class="ps-blog-detail pt-80 pb-80">
                     <div class="ps-post">
+                    @if(session('notification'))
+                    <div class="alert alert-success" data-dismiss="alert">
+                        {!!session('notification')!!}
+                    </div>
+                     @endif
                       <div class="ps-post__header"><a class="ps-post__title" >My Profile</a>
                       </div>
                       <div class="ps-post__content">
@@ -20,7 +35,7 @@
 
                                         </div><!-- /.well -->
 
-                                        <div class="space"></div>
+                                        <div class ="space"></div>
 
                                     <form class="form-horizontal" method="POST" action='user/profile/change/{{Auth::user()->id}}'>
                                         {{ csrf_field() }}
@@ -79,7 +94,7 @@
 
                                                         <div class="col-sm-9">
                                                             <span class="input-icon input-icon-right">
-                                                                <input class="input-medium input-mask-phone" type="text" id="form-field-phone" value="{{Auth::user()->phone}}" name='phone'/>
+                                                                <input class="input-medium input-mask-phone" type="number" id="form-field-phone" value="{{Auth::user()->phone}}" name='phone'/>
                                                                 <i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
                                                                 @if ($errors->has('phone'))
                                                                     <span class="help-block">
@@ -90,34 +105,45 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="space"></div>
-
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">Password</label>
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-phone"></label>
 
                                                         <div class="col-sm-9">
-                                                            <span class="input-icon">
-                                                                <input type="password" id="form-field-facebook" value="" name='password'/>
-                                                                <i class="ace-icon fa  fa-key"></i>
+                                                            <span class="input-icon input-icon-right">
+                                                            <input type="checkbox" onclick="myFunction()" id='showEnterPassword' name='changepassword' {{ old('changepassword') ? 'checked':'' }}> Change password<br>
                                                             </span>
                                                         </div>
                                                     </div>
+                                                    <div class="space"></div>
 
-                                                    <div class="space-4"></div>
+                                                    <div id='formPassword' style='display:none'>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">Password</label>
 
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Confirm Password</label>
+                                                            <div class="col-sm-9">
+                                                                <span class="input-icon">
+                                                                    <input type="password" id="form-field-facebook" value="" name='password'/>
+                                                                    <i class="ace-icon fa  fa-key"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
 
-                                                        <div class="col-sm-9">
-                                                            <span class="input-icon">
-                                                                <input type="password" value="" id="form-field-twitter" name='confirm_password'/>
-                                                                <i class="ace-icon fa fa-key "></i>
-                                                                @if ($errors->has('confirm_password'))
-                                                                    <span class="help-block">
-                                                                        <strong style='color:red'>{{ $errors->first('confirm_password') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </span>
+                                                        <div class="space-4"></div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Confirm Password</label>
+
+                                                            <div class="col-sm-9">
+                                                                <span class="input-icon">
+                                                                    <input type="password" value="" id="form-field-twitter" name='confirm_password'/>
+                                                                    <i class="ace-icon fa fa-key "></i>
+                                                                    @if ($errors->has('confirm_password'))
+                                                                        <span class="help-block">
+                                                                            <strong style='color:red'>{{ $errors->first('confirm_password') }}</strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,3 +192,19 @@
       </div>
 </div>
 @endsection
+
+<script>
+function myFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("showEnterPassword");
+  // Get the output text
+  var formPassword = document.getElementById("formPassword");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    formPassword.style.display = "block";
+  } else {
+    formPassword.style.display = "none";
+  }
+}
+</script>

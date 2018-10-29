@@ -12,6 +12,8 @@ use Cart;
 use App\Order;
 use App\OrderDetail;
 use Session;
+use Mail;
+use DB;
 
 class OrderController extends Controller
 {
@@ -20,14 +22,6 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-        $categories = Category::all();
-        $bestsellers = Product::where('promote_price', '<>', 0)->take(4)->get();
-        // $searchProducts = Product::where('name', 'like', "%$keyword%")->take(4)->get();
-        view()->share('categories', $categories);
-        view()->share('bestsellers', $bestsellers);
-    }
 
     public function getCheckOut()
     {
@@ -36,34 +30,72 @@ class OrderController extends Controller
 
     public function postCheckOut(Request $request)
     {
+        // dd($request->all());
         if (!Auth::check()){
             return redirect()->back()->with('warning', 'You must login to process checkout');
         } else {
-            request()->validate([
+            $request->validate([
+                'name' => 'sometimes|required',
+                'email' => 'sometimes|required',
+                'phone' => 'sometimes|required',
+                'address' => 'sometimes|required',
                 'payment' => 'required',
                 ]);
 
-            $orders = new Order;
-            $orders->user_id = Auth::user()->id;
-            $orders->date_order = date('Y-m-d');
-            $orders->payment = $request->payment;
-            $orders->note = $request->note;
-            $orders->save();
+            try {
+                \DB::transaction(function () use ($request) {
+                    $orders = new Order;
+                    $orders->user_id = Auth::user()->id;
+                    $orders->date_order = date('Y-m-d H:i:s');
+                    $orders->payment = $request->payment;
+                    $orders->note = $request->note;
+                    $orders->save();
 
-
-            foreach (Cart::content() as $cart) {
-                $oderDetails = new OrderDetail;
-                $oderDetails->order_id = $orders->id;
-                $oderDetails->product_id = $cart->id;
-                $oderDetails->quantity = $cart->qty;
-                $oderDetails->price = ($cart->price/$cart->qty);
-                $oderDetails->save();
+                    foreach (Cart::content() as $cart) {
+                        $product= Product::where('id', $cart->id)->first();
+                        if ($product->quantity >= $cart->qty) {
+                            $oderDetails = new OrderDetail;
+                            $oderDetails->order_id = $orders->id;
+                            $oderDetails->product_id = $cart->id;
+                            $oderDetails->quantity = $cart->qty;
+                            $oderDetails->price = ($cart->price/$cart->qty);
+                            $oderDetails->save();
+                            DB::table('products')->where('id', $cart->id)->decrement('quantity', $oderDetails->quantity);
+                            
+                        } else {
+                            throw new \Exception("Error Processing Request", 1);
+                    }
+                        //Send mail order successfully
+                        $order_details = OrderDetail::where('order_id', $orders->id)->get();
+                        $user = User::find($orders->user_id);
+                        foreach ($order_details as $detail) {
+                            $product = Product::find($detail->product_id);
+                            $data = [
+                                'name' => $user->name,
+                                'email' => $user->email,
+                                'productName' => $product->name,
+                                'quantity' => $detail->quantity,
+                                'price' => $detail->price
+                            ];
+                        }
+                        // dd($datas);
+                        Mail::send('emails.orders', $data, function($message) use ($data){
+                            $message->to($data['email']);
+                            $message->subject('Your order at Vanila Bakery');
+                        });
+                    }
+                });
+                
+                $request->session()->forget('cart');
+                
+                return redirect()->back()->with('notification', 'The order is saved. Please checks mail to see your order!');
+            } catch (\Exception $ex) {
+                \DB::rollback();
+                // dd($ex->getMessage());
+                return redirect()->back()->with('warning', 'The order is error!');
             }
-            $request->session()->forget('cart');
-            return redirect()->back()->with('notification', 'The order is saved');
+
         }
-
-
     }
 
     /**
@@ -101,6 +133,26 @@ class OrderController extends Controller
         $changeStatus = Order::find($id);
         $changeStatus->status = $request->status;
         $changeStatus->save();
+
+        //Send mail change status order
+        $order_details = OrderDetail::where('order_id', $changeStatus->id)->get();
+        $user = User::find($changeStatus->user_id);
+        foreach ($order_details as $detail) {
+            $product = Product::find($detail->product_id);
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'productName' => $product->name,
+                'quantity' => $detail->quantity,
+                'price' => $detail->price,
+                'status' => $changeStatus->status
+            ];
+        }
+        // dd($data);
+        Mail::send('emails.status-order', $data, function($message) use ($data){
+            $message->to($data['email']);
+            $message->subject('Order Status');
+        });
         return redirect('admin/order/index')->with('notification','The order changed status successfully');
     }
 
@@ -121,6 +173,25 @@ class OrderController extends Controller
                 $orderDetail->delete();
             }
         }
+        //Send mail delete order 
+        $order_details = OrderDetail::where('order_id', $order->id)->get();
+        $user = User::find($order->user_id);
+        foreach ($order_details as $detail) {
+            $product = Product::find($detail->product_id);
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'productName' => $product->name,
+                'quantity' => $detail->quantity,
+                'price' => $detail->price,
+            ];
+        }
+        // dd($data);
+        Mail::send('emails.delete-order', $data, function($message) use ($data){
+            $message->to($data['email']);
+            $message->subject('Order was deleted');
+        });
+
         Order::destroy($id);
         return redirect('admin/order/index')->with('notification','The order deleted successfully');
     }

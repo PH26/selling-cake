@@ -12,28 +12,37 @@
 */
 //Route for frontend
 
-Route::get('/', 'PageController@homepage');
+Route::get('homepage', 'PageController@homepage');
 Route::get('allproduct', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
+Route::get('search','PageController@getSearch')->name('search');
+Route::get('fillter/{id}','PageController@getFillter');
 Route::get('contact', 'PageController@getContact');
-Route::post('contact', 'PageController@postContact');
+Route::post('contact', 'PageController@sendContact');
+Route::get('term-and-conditions', 'PageController@termAndConditions');
+Route::get('about', 'PageController@about');
 //Add to cart and Order
 Route::get('add-to-cart/{id}', 'PageController@getAddToCart');
+Route::post('add-to-cart-qty/{id}', 'PageController@getAddToCartWithQty');
 Route::get('delete-item-cart/{id}','PageController@getDeleteItemCart');
 Route::get('viewcart', 'PageController@getViewCart');
 Route::post('cart/changeQty/{id}/{qty}','PageController@changeQty');
 Route::get('checkout', 'OrderController@getCheckOut');
 Route::post('checkout', 'OrderController@postCheckOut');
 //Management for User
-Route::get('user/profile', 'PageController@userProfile');
-Route::post('user/profile/change/{id}', 'PageController@changeUserProfile');
-Route::get('user/order', 'PageController@userOrder');
-Route::get('user/order/delete/{id}', 'PageController@deleteOrder');
+Route::group(['prefix' => 'user', 'middleware' => 'userlogin'], function () {
+	Route::get('profile', 'PageController@userProfile');
+	Route::post('profile/change/{id}','PageController@changeUserProfile');
+	Route::get('order', 'PageController@userOrder');
+	Route::get('order/delete/{id}', 'PageController@deleteOrder');
+});
+
 
 
 //Route for admin
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'adminlogin'], function(){
+	Route::get('dash-board', 'HomeController@dashBoard');
 	Route::group(['prefix' => 'user'], function(){
 
 		Route::get('index', 'UsersController@index');
@@ -45,6 +54,8 @@ Route::group(['prefix' => 'admin'], function(){
 		Route::post('edit/{id}', 'UsersController@update');
 
 		Route::get('delete/{id}', 'UsersController@destroy');
+
+		Route::get('action', 'UsersController@action')->name('users_search.action');
 	});
 
 	Route::group(['prefix' => 'category'], function(){
@@ -62,15 +73,20 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::group(['prefix' => 'product'], function(){
 
 		Route::get('index', 'ProductsController@index');
+		Route::post('getdata', 'ProductsController@getProducts')->name('dataProcessing');
 
 		Route::get('add', 'ProductsController@create');
 		Route::post('add', 'ProductsController@store');
+
+		Route::get('show/{id}', 'ProductsController@show');
 
 		Route::get('edit/{id}', 'ProductsController@edit');
 		Route::post('edit/{id}', 'ProductsController@update');
 
 		Route::get('delete/{id}', 'ProductsController@destroy');
+		Route::post('fetch', 'ProductsController@fetch')->name('product.fetch');
 		Route::post('search', 'SearchController@productSearch' )->name('product.search');
+		Route::get('action', 'ProductsController@action')->name('products_search.action');
 	});
 	Route::group(['prefix' => 'slide'], function(){
 

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Product;
+use App\Category;
+use App\Order;
 
 class HomeController extends Controller
 {
@@ -17,12 +21,18 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashBoard()
     {
-        return view('home');
+        $user = User::all();
+        $product = Product::all();
+        $category = Category::all();
+        $orders = Order::all();
+        return view('admin.dashboard', compact('user', 'product', 'category','orders'));
     }
+
+
 }

@@ -18,10 +18,10 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned()->nullable()->default(null);
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable()->default(null);
             $table->string('image');
             $table->integer('unit_price');
-            $table->integer('promote_price');
+            $table->integer('promote_price')->nullable()->default(null);
             $table->integer('quantity');
             $table->timestamps();
         });

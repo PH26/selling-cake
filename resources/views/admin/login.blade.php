@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+		<title>Login Page - Vanila Bakery Admin</title>
 
 		<base href="{{asset('')}}">
 		<meta name="description" content="User login page" />
@@ -45,10 +45,9 @@
 							<div class="center">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white" id="id-text2">Application</span>
+									<span class="white" id="id-text2">Login Admin</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+								<h4 style='color: #ee7560;' id="id-company-text">&copy; Vanila Bakery</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -56,6 +55,14 @@
 							<div class="position-relative">
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
+										@if(session('warning'))
+											<div class="alert alert-warning">
+											<button type="button" class="close" data-dismiss="alert">
+												<i class="ace-icon fa fa-times"></i>
+											</button>
+												{{session('warning')}}
+											</div>
+										@endif
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
@@ -129,7 +136,7 @@
 											</div>
 										</div><!-- /.widget-main -->
 
-										<div class="toolbar clearfix">
+										<!-- <div class="toolbar clearfix">
 											<div>
 												<a href="#" data-target="#forgot-box" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
@@ -143,7 +150,7 @@
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>
 											</div>
-										</div>
+										</div> -->
 									</div><!-- /.widget-body -->
 								</div><!-- /.login-box -->
 

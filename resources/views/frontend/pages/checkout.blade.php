@@ -3,7 +3,17 @@
 
 <div class="page-wrap">
 
-@include('frontend.layout.section')
+<div class="ps-section--hero"><img src="frontend/images/hero/01.jpg" alt="">
+            <div class="ps-section__content text-center">
+                <h3 class="ps-section__title">OUR BAKERY</h3>
+                <div class="ps-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="homepage">Home</a></li>
+                        <li class="active">Checkout</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
 <div class="ps-section--checkout pt-80 pb-80">
             <div class="container">
                 <form class="ps-checkout" action="checkout" method="post">
@@ -11,23 +21,19 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
                             <div class="ps-checkout__billing">
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 @if(session('notification'))
                                     <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="ace-icon fa fa-times"></i>
+                                    </button>
                                         {{session('notification')}}
                                     </div>
                                 @endif
                                 @if(session('warning'))
                                     <div class="alert alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="ace-icon fa fa-times"></i>
+                                    </button>
                                         {{session('warning')}}
                                     </div>
                                 @endif
@@ -39,25 +45,44 @@
                                     <label>Name
                                     </label>
                                     <input class="form-control" type="text" name='name' value='{{Auth::user()->name}}'>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block col-sm-9">
+                                            <strong style='color:red; position:relative; left:150px' class="col-xs-10 col-sm-5">{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address
                                     </label>
                                     <input class="form-control" type="email"
                                     name='email' value='{{Auth::user()->email}}'>
+                                    @if ($errors->has('email'))
+                                        <span class="help-block col-sm-9">
+                                            <strong style='color:red; position:relative; left:150px' class="col-xs-10 col-sm-5">{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label>Phone
                                     </label>
                                     <input class="form-control" type="text" name='phone' value='{{Auth::user()->phone}}'>
+                                    @if ($errors->has('phone'))
+                                        <span class="help-block col-sm-9">
+                                            <strong style='color:red;position:relative; left:150px' class="col-xs-10 col-sm-5">{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label>Address
                                     </label>
                                     <input class="form-control" type="text"
                                     name='address' value='{{Auth::user()->address}}'>
+                                    @if ($errors->has('address'))
+                                        <span class="help-block col-sm-9">
+                                            <strong style='color:red; position:relative; left:150px' class="col-xs-10 col-sm-5">{{ $errors->first('address') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
-								<input type="hidden" name='role' value="0">
                                 <h3> Addition information</h3>
                                 <div class="form-group">
                                     <label>Order Notes</label>
@@ -88,6 +113,11 @@
                                     @endforeach
                                 </table>
                                 <h3>Payment Method</h3>
+                                @if ($errors->has('payment'))
+                                        <span class="help-block col-sm-12">
+                                            <strong style='color:red; position:relative; left:-11px' class="col-xs-10 col-sm-12">{{ $errors->first('payment') }}</strong>
+                                        </span>
+                                @endif
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
@@ -100,6 +130,18 @@
                                         </label>
                                         <div class="card-list"></div>
                                     </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="payment" value="Visa">Visa
+                                        </label>
+                                        <div class="card-list"></div>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="payment" value="MasterCard">MasterCard
+                                        </label>
+                                        <div class="card-list"></div>
+                                    </div>
                                 </div>
                                 <button class="ps-btn ps-btn--sm">Place Order</button>
                             </div>
@@ -109,18 +151,3 @@
             </div>
         </div>
 @endsection
-<script>
-function myFunction() {
-  // Get the checkbox
-  var checkBox = document.getElementById("showEnterPassword");
-  // Get the output text
-  var formPassword = document.getElementById("formPassword");
-
-  // If the checkbox is checked, display the output text
-  if (checkBox.checked == true){
-    formPassword.style.display = "block";
-  } else {
-    formPassword.style.display = "none";
-  }
-}
-</script>
