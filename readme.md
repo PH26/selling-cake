@@ -1,5 +1,3 @@
-Selling Cake project
+Selling Cake EC project
 
-The project use PHP, MySQL and Laravel framwork
-
-Team: Lam - Hang - Hieu
+The project was build by PHP, MySQL and Laravel framwork
