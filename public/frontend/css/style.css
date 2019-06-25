@@ -1248,14 +1248,14 @@ ul, ol {
   color: #626262;
 }
 
-.ps-list--circle a:hover {
+/* .ps-list--circle a:hover {
   color: #ee7560;
 }
 
 .ps-list--circle a:hover .circle {
   background-color: #ee7560;
   border-color: #ee7560;
-}
+} */
 
 .ps-list--circle a:hover .circle:before {
   color: #fff;

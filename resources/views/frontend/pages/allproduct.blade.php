@@ -56,7 +56,7 @@
                                     <ul class="ps-list--circle">
                                         <li class="current"><a href="allproduct"><span class="circle"></span>All category </a></li>
                                         @foreach($categories as $category)
-                                        <li><a href="category/{{$category->id}}"><span class="circle"></span>{{$category->name}}</a></li>
+                                            <li><a href="category/{{$category->id}}"><span class="circle"></span>{{$category->name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

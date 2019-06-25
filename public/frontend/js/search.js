@@ -16,7 +16,6 @@ $searchProducts.keyup(function () {
                 query: $query,
             },
             success: function (data) {
-                console.log(data);
                 if (data.length > 0) {
                     let templateToInsert = '';
                     for (let i = 0; i <= totalPerDiv - 1; i++) {

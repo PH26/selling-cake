@@ -77,7 +77,7 @@
                 </div>
                 <div class="ps-section__content">
                     <div class="owl-slider owl-slider--best-seller" data-owl-auto="true" data-owl-loop="true" data-owl-speed="100000" data-owl-gap="30" data-owl-nav="true" data-owl-dots="false" data-owl-animate-in="" data-owl-animate-out="" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-nav-left="&lt;i class=&quot;ps-icon--back&quot;&gt;&lt;/i&gt;" data-owl-nav-right="&lt;i class=&quot;ps-icon--next&quot;&gt;&lt;/i&gt;">
-                    @foreach($bestsellers as $product)
+                        @foreach($bestsellers as $product)
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <div class="ps-badge">

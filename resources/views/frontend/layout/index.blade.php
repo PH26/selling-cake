@@ -65,6 +65,8 @@
     <script type="text/javascript" src="frontend/js/main.js"></script>
     <script type="text/javascript" src="frontend/js/myjavascript.js"></script>
     <script type="text/javascript" src="frontend/js/search.js"></script>
+    <script type="text/javascript" src="frontend/js/selected_category.js"></script>
+</body>
 </body>
 
 </html>
