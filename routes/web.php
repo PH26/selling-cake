@@ -12,7 +12,7 @@
 */
 //Route for frontend
 
-Route::get('homepage', 'PageController@homepage');
+Route::get('/', 'PageController@homepage');
 Route::get('allproduct', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
@@ -84,7 +84,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminlogin'], function(){
 		Route::post('edit/{id}', 'ProductsController@update');
 
 		Route::get('delete/{id}', 'ProductsController@destroy');
-		Route::post('fetch', 'ProductsController@fetch')->name('product.fetch');
 		Route::post('search', 'SearchController@productSearch' )->name('product.search');
 		Route::get('action', 'ProductsController@action')->name('products_search.action');
 	});

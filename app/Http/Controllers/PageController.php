@@ -15,6 +15,7 @@ use Cart;
 use Session;
 use Mail;
 use DB;
+use App\Services\ProductService;
 
 class PageController extends Controller
 {
@@ -82,11 +83,21 @@ class PageController extends Controller
             echo 'ok';
         }
     }
-    public function getSearch(Request $request){
-        $products = Product::orderBy('promote_price', 'ASC')
-                    ->where('name','like','%'.$request->key.'%')
-                    ->paginate(6)->appends(['key'=> $request->key]);
-        return view('frontend.pages.search',compact('products'));
+    public function getSearch(Request $request) 
+    {
+        if ($request->ajax()) {
+            $response = app(ProductService::class)->ajaxProductSearch($request->get('query'));
+            return response()->json($response);
+        } else {
+            $products = Product::orderBy('promote_price', 'ASC')
+                ->where('name', 'like', '%' . $request->key . '%')
+                ->paginate(6)->appends(['key' => $request->key]);
+            return view('frontend.pages.search', compact('products'));
+            // $query = $request->get('query');
+            // $search = app(ProductService::class)->productSearch($query);
+            // return view('public.page.search', compact('search', 'query'));
+        }
+        
     }
 
     public function userProfile()
