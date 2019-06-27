@@ -38,7 +38,7 @@
     <!-- JS Library-->
     <script type="text/javascript" src="frontend/plugins/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="frontend/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="frontend/plugins/owl-carousel/owl.carousel.min.js"></script> 
+    <script type="text/javascript" src="frontend/plugins/owl-carousel/owl.carousel.min.js"></script>
     <script type="text/javascript" src="frontend/plugins/overflow-text.js"></script>
     <script type="text/javascript" src="frontend/plugins/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="frontend/plugins/imagesloaded.pkgd.js"></script>
@@ -62,8 +62,9 @@
     <script type="text/javascript" src="frontend/plugins/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
     <script type="text/javascript" src="frontend/plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
     <!-- Custom scripts-->
+    <script type="text/javascript" src="frontend/js/lib/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="frontend/js/main.js"></script>
-    <script type="text/javascript" src="frontend/js/myjavascript.js"></script>
+    <script type="text/javascript" src="frontend/js/cart.js"></script>
     <script type="text/javascript" src="frontend/js/search.js"></script>
     <script type="text/javascript" src="frontend/js/selected_category.js"></script>
 </body>

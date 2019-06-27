@@ -13,7 +13,7 @@
 //Route for frontend
 
 Route::get('/', 'PageController@homepage');
-Route::get('allproduct', 'PageController@allProduct');
+Route::get('all-product', 'PageController@allProduct');
 Route::get('category/{id}', 'PageController@category');
 Route::get('product/{id}', 'PageController@product');
 Route::get('search','PageController@getSearch')->name('search');

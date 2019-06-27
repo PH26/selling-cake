@@ -6,7 +6,7 @@
                 <li class=""><a href="/">Home</a>
                 </li>
                 <li><a href="about">About</a></li>
-                <li class="menu-item-has-children"><a href="allproduct">Categories</a>
+                <li class="menu-item-has-children"><a href="all-product">Categories</a>
                     <ul class="sub-menu">
                         @foreach($categories as $category)
                         <li><a href="category/{{$category->id}}">{{$category->name}}</a></li>
@@ -29,7 +29,7 @@
             </ul>
             @else
             <ul class="menu menu--right">
-            <li class="dropdown-modal">
+                <li class="dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <span class="user-info">
                             <small>Welcome,
@@ -64,31 +64,17 @@
                         </li>
                     </ul>
                 </li>
-                </ul>
+            </ul>
             @endif
             <div class="ps-cart">
-                <a class="ps-cart__toggle" href="viewcart"><span><i>
-                    {{Cart::count()}}
-                </i></span><i class="ps-icon--shopping-cart"></i></a>
+                <a class="ps-cart__toggle" href="viewcart"><span><i class="cart-count">
+                        </i></span><i class="ps-icon--shopping-cart"></i></a>
                 <div class="ps-cart__listing">
-                    <div class="ps-cart__content">
-                        @foreach(Cart::content() as $cart)
-                        <div class="ps-cart-item">
-                            <a class="ps-cart-item__close" href="{!!url('delete-item-cart', ['id' => $cart->rowId])!!}"></a>
-                            <div class="ps-cart-item__thumbnail">
-                                <a href="product/{{$cart->id}}"></a><img src="upload/products/{{$cart->options->image}}" alt=""></div>
-                            <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product/{{$cart->id}}">{{$cart->name}}</a>
-                                <p><span>Quantity:<i>{{$cart->qty}}</i></span></p>
-                                <p><span>Item total:<i>
-                                {!!number_format($cart->price*$cart->qty,0,",",".") . ' đ'!!}
-                                </i></span></p>
-                            </div>
-                        </div>
-                        @endforeach
+                    <div class="ps-cart__content" id="cart-content">
                     </div>
                     <div class="ps-cart__total">
-                        <p>Number of items:<span>{{Cart::count()}}</span></p>
-                        <p>Total:<span>{!!Cart::subtotal(0,",",".") . ' đ'!!}</span></p>
+                        <p>Number of items:<span class="cart-count"></span></p>
+                        <p>Total:<span id="cart-total"></span></p>
                     </div>
                     <div class="ps-cart__footer"><a class="ps-btn ps-btn--view-bag" href="viewcart">View Cart</a></div>
                 </div>
