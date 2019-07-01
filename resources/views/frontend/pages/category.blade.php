@@ -17,7 +17,7 @@
     <div class="ps-section--page">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-push-3 col-md-push-3">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-push-4 col-md-push-4">
                     <div class="ps-shop-grid pt-80">
                         <div class="ps-shop-features">
                             <div class="row">
@@ -28,13 +28,11 @@
                                             <div class="ps-badge"><span>-{!!number_format((1-($product->promote_price/$product->unit_price))*100, 0) . '%'!!}</span></div>
                                             <a class="ps-product__overlay" href="product/{{$product->id}}"></a><img src="upload/products/{{$product->image}}" height='220.27px' alt="">
                                         </div>
-                                        <div class="ps-product__content"><a class="ps-product__title" href="product/{{$product->id}}">{{$product->name}}</a>
-                                            <div class="ps-product__category"><del>
-                                                    <p class="ps-product__price">{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</p>
-                                                </del>
-                                            </div>
-                                            <p class="ps-product__price">{!!number_format($product->promote_price,0,",",".") . ' đ'!!}</p>
-                                            <a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$product->id])!!}">Order now<i class="fa fa-angle-right"></i></a>
+                                        <div class="ps-product__content">
+                                            <div class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></div>
+                                            <p class="ps-product__price" data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}"><del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del></p>
+                                            <p>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}</p>
+                                            </p><a class="ps-btn ps-btn--xs add-to-cart" data-check='ps-product'>add to cart<i class="fa fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-pull-9 col-md-pull-9">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-pull-8 col-md-pull-3">
                     <div class="ps-sidebar">
                         <aside class="ps-widget ps-widget--sidebar ps-widget--category">
                             <div class="ps-widget__header">
@@ -55,7 +53,7 @@
                             <div class="ps-widget__content">
                                 <ul class="ps-list--circle">
                                     <li>
-                                        <a href="allproduct">
+                                        <a href="all-product">
                                             <span id="0" class="common_selector circle"></span>All category
                                         </a>
                                     </li>
@@ -87,13 +85,15 @@
                             <div class="ps-widget__content">
                                 <div class="ps-product--sidebar">
                                     @foreach($bestsellers as $bestseller)
-                                    <div class="ps-product__thumbnail">
-                                        <a class="ps-product__overlay" href="product/{{$bestseller->id}}"></a><img src="upload/products/{{$bestseller->image}}" style='height: 56.4px;'></div>
-                                    <div class="ps-product__content">
-                                        <h4 class="ps-product__title"><a href="product/{{$bestseller->id}}">{{$bestseller->name}}</a></h4>
-                                        <p class="ps-product__price" style='margin-bottom: -2px'>
-                                            <del>{!!number_format($bestseller->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($bestseller->promote_price,0,",",".") . ' đ'!!}
-                                        </p><a class="ps-btn ps-btn--xs" href="{!!url('add-to-cart', [$bestseller->id])!!}" style='margin-bottom: 10px;'>Order Now</a>
+                                    <div class="ps-product--list">
+                                        <div class="ps-product__thumbnail">
+                                            <a class="ps-product__overlay" href="product/{{$bestseller->id}}"></a><img src="upload/products/{{$bestseller->image}}" style='height: 56.4px;'></div>
+                                        <div class="ps-product__content">
+                                            <h4 class="ps-product__title"><a href="product/{{$bestseller->id}}">{{$bestseller->name}}</a></h4>
+                                            <p class="ps-product__price" style='margin-bottom: -2px' data-unit="{{$bestseller->unit_price}}" data-promote="{{$bestseller->promote_price}}">
+                                                <del>{!!number_format($bestseller->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($bestseller->promote_price,0,",",".") . ' đ'!!}
+                                            </p><a class="ps-btn ps-btn--xs add-to-cart" style='margin-bottom: 10px;'>add to cart<i class="fa fa-angle-right"></i></a>
+                                        </div>
                                     </div>
                                     @endforeach
                                 </div>

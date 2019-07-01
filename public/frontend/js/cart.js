@@ -4,17 +4,16 @@ $(document).ready(function() {
 
     $addToCart.on('click', function() {
         const that = $(this);
-        const $checkBestSeller = that.data('check');
+        const $checkParent = that.data('check');
         let $productList;
         let item;
         const itemFromLocal = getItemFromLocal();
         
-        if ($checkBestSeller) {
+        if ($checkParent) {
             $productList = that.closest('.ps-product');
         } else {
             $productList = that.closest('.ps-product--list');
         }
-        
         item = createItem($productList);
         if (itemFromLocal !== null) {
             const idOfItems = getIdFromObject(itemFromLocal);
@@ -40,8 +39,8 @@ $(document).ready(function() {
         const id = splitGetParam(hrefGetId, 1);
         const image = splitGetParam(scrGetImage, 2);
         const name = productList.find('.ps-product__title').text();
-        const unitPrice = productList.find('del').data('unit');
-        const promotePrice = productList.find('del').data('promote');
+        const unitPrice = productList.find('.ps-product__price').data('unit');
+        const promotePrice = productList.find('.ps-product__price').data('promote');
         let price;
 
         if (promotePrice) {
@@ -132,7 +131,7 @@ $(document).ready(function() {
     }
 
     //Remove item from cart
-    const $document = $(document)
+    const $document = $(document);
     $document.on("click", ".cart-remove", function () {
         const itemLocal = getItemFromLocal();
         const itemRemove = $(this).parent().find('.ps-cart-item__title').text();

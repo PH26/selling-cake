@@ -24,12 +24,11 @@
                             <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                             <div class="ps-product__category"><a href="category/{{$product->categories->id}}">{{$product->categories->name}}</a>
                             </div>
-                            <div class="ps-product__category"><del data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">
-                                    <p class="ps-product__price">{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</p>
-                                </del>
-                            </div>
-                            <p class="ps-product__price">{!!number_format($product->promote_price,0,",",".") . ' đ'!!}</p>
-                            <a class="ps-btn ps-btn--xs add-to-cart" data-check='best-seller'>add to cart<i class="fa fa-angle-right"></i></a>
+                            <p class="ps-product__price" data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">
+                                <del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>
+                            </p>
+                            <p>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}</p>
+                            <a class="ps-btn ps-btn--xs add-to-cart" data-check='ps-product'>add to cart<i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                     @endforeach
@@ -54,8 +53,8 @@
                                 <div class="ps-product__category"><a class="ps-product__category" href="category/{{$product->categories->id}}">{{$product->categories->name}}</a>
                                 </div>
                                 <p>{{$product->description}}</p>
-                                <p class="ps-product__price">
-                                    <del data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
+                                <p class="ps-product__price" data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">
+                                    <del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
                                 </p>
                                 <a class="ps-btn ps-btn--xs add-to-cart">add to cart<i class=" fa fa-angle-right"></i></a>
                             </div>
@@ -76,8 +75,8 @@
                                 <h4 class="ps-product__title"><a href="product/{{$product->id}}">{{$product->name}}</a></h4>
                                 <div class="ps-product__category"><a class="ps-product__category" href="category/{{$product->categories->id}}">{{$product->categories->name}}</a>
                                 </div>
-                                <p class="ps-product__price">
-                                    <del data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
+                                <p class="ps-product__price" data-unit="{{$product->unit_price}}" data-promote="{{$product->promote_price}}">
+                                    <del>{!!number_format($product->unit_price,0,",",".") . ' đ'!!}</del>{!!number_format($product->promote_price,0,",",".") . ' đ'!!}
                                 </p><a class="ps-btn ps-btn--xs add-to-cart">add to cart<i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>

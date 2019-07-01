@@ -2118,7 +2118,7 @@ textarea.form-control {
   text-align: center;
 }
 
-.ps-product .ps-product__title {
+.ps-product .ps-product__title a {
   margin-bottom: 5px;
   display: block;
   font-family: LibreBaskerville;
@@ -2241,7 +2241,21 @@ textarea.form-control {
   color: #000000;
 }
 
+.ps-product .ps-product__content p{
+  margin-bottom: 15px;
+  font-family: "Varela Round", sans-serif;
+  font-size: 18px;
+  color: #000000;
+}
+
 .ps-product--list .ps-product__content p.ps-product__price del {
+  font-size: 14px;
+  color: #777;
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.ps-product .ps-product__content p.ps-product__price del {
   font-size: 14px;
   color: #777;
   font-weight: 400;
@@ -5459,7 +5473,7 @@ textarea.form-control {
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
   left: 0;
-  width: calc((100% - 1170px) / 2 + 280px);
+  width: calc((100% - 1050px) / 2 + 280px);
   height: 100%;
   z-index: 1;
   background-color: #f5f3f0;
