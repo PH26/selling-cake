@@ -17,19 +17,26 @@ $(document).ready(function() {
         if (itemFromLocal !== null) {
             const idOfItems = getIdFromObject(itemFromLocal);
             if (idOfItems.indexOf(item.id) === -1) {
-                itemFromLocal.push(item);
-                setItemToLocal(itemFromLocal);
-                toast('success', 'Added ' + item.name + ' successfully!');
-                renderCart(itemFromLocal);
+                addItemNotExistInItems(itemFromLocal, item);
             } else {
                 toast('error', item.name + ' only added to cart once!');
             }
         } else {
-            setItemToLocal([item]);
-            toast('success', 'Added ' + item.name + ' successfully!');
-            renderCart([item]);
+            createItemsIfNotExist(item);
         }
     });
+
+    const createItemsIfNotExist = (item) => {
+        setItemToLocal([item]);
+        toast('success', 'Added ' + item.name + ' successfully!');
+        renderCart([item]);
+    }
+    const addItemNotExistInItems = (itemFromLocal, item) => {
+        itemFromLocal.push(item);
+        setItemToLocal(itemFromLocal);
+        toast('success', 'Added ' + item.name + ' successfully!');
+        renderCart(itemFromLocal);
+    }
 
     const createItem = (productList, quantity = 1) => {
         const hrefGetId = productList.find('.ps-product__title a').attr('href');
@@ -41,7 +48,7 @@ $(document).ready(function() {
         const promotePrice = productList.find('.ps-product__price').data('promote');
         let price;
 
-        if (promotePrice) {
+        if (promotePrice > 0) {
             price = promotePrice;
         } else {
             price = unitPrice;
@@ -236,5 +243,72 @@ $(document).ready(function() {
 
     //Initialization change quantiy
     changeQty($groupNumber);
+
+    //Add to cart at product page
+    const getIndexFromId = (items, id) => {
+        let index;
+        $.each(items, function(key, val) {
+            if (val.id === id) {
+                index = key;
+            }
+        })
+        return index;
+    }
+
+    const increaseQtyIfExist = (itemFromLocal, item) => {
+        const index = getIndexFromId(itemFromLocal, item.id);
+        itemFromLocal[index].quantity += item.quantity;
+        setItemToLocal(itemFromLocal);
+        toast('success', 'Added ' + item.name + ' successfully!');
+        renderCart(itemFromLocal);
+    }
+    const $addtoCartProductPage = $('.add-to-cart-product-page');
+    $addtoCartProductPage.click(function() {
+        const $productList = $(this).closest('.ps-product__content');
+        const itemFromLocal = getItemFromLocal();
+        
+        //Create item to add to cart
+        const address = window.location.pathname;
+        const id = splitGetParam(address, 2);
+        const image = $productList.find('.ps-product__thumbnail').data('image');
+        const name = $productList.find('.ps-product__name').text();
+        const input = $productList.find('.form-group--number input');
+        const quantity = parseInt(input.val());
+        const unitPrice = $productList.find('.ps-product__price').data('unit');
+        const promotePrice = $productList.find('.ps-product__price').data('promote');
+        let price;
+
+        if (promotePrice > 0) {
+            price = promotePrice;
+        } else {
+            price = unitPrice;
+        }
+        const item = { id, image, name, price, quantity };
+        
+        //Check quantity over quantity available of the product when click
+        const quantityAvailable = input.data('quantity')
+        const index = getIndexFromId(itemFromLocal, item.id);
+        let qtyIndexInItems = 0;
+        if (index !== undefined) {
+            qtyIndexInItems = itemFromLocal[index].quantity;
+        }
+
+        if (qtyIndexInItems + quantity <= quantityAvailable) {
+            if (itemFromLocal !== null) {
+                const idOfItems = getIdFromObject(itemFromLocal);
+                if (idOfItems.indexOf(item.id) === -1) {
+                    addItemNotExistInItems(itemFromLocal, item);
+                } else {
+                    increaseQtyIfExist(itemFromLocal, item);
+                }
+            } else {
+                createItemsIfNotExist(item);
+            }
+        } else {
+            errorOverQty();
+            input.prop('readOnly', true);
+            $productList.find('.form-group--number button').off('click');
+        }
+    })
 
 });
