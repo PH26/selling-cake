@@ -1,7 +1,6 @@
 $(document).ready(function() {
     //Add to cart 
     const $addToCart = $('.add-to-cart');
-
     $addToCart.on('click', function() {
         const that = $(this);
         const $checkParent = that.data('check');
@@ -30,7 +29,6 @@ $(document).ready(function() {
             toast('success', 'Added ' + item.name + ' successfully!');
             renderCart([item]);
         }
-        
     });
 
     const createItem = (productList, quantity = 1) => {
@@ -146,4 +144,97 @@ $(document).ready(function() {
         toast('success', 'Removed ' + itemRemove + ' successfully!');
         renderCart(itemLocal);
     })
+    
+    
+    //Change quantiy of a product 
+    const $groupNumber = $(".form-group--number");
+
+    const getAllIdFromItems = (items) => {
+        return items.map(item => item.id);
+    }
+
+    const totalQtyofItems = (currentInput, unit) => {
+        const itemLocal = getItemFromLocal();
+        const address = window.location.pathname;
+        const idFromAddress = splitGetParam(address, 2);
+        const idFromLocal = getAllIdFromItems(itemLocal);
+        let totalQty;
+
+        if (idFromLocal.indexOf(idFromAddress) === 0) {
+            totalQty = currentInput + unit;
+        } else {
+            totalQty = currentInput;
+        }
+        return totalQty;
+    }
+
+    const inputVal = (input, val, unit = 0) => {
+        return input.val(val - unit);
+    }
+    const errorOverQty = () => {
+        return toast('error', 'You add over quantity available of the product');
+    }
+    const notBelowOne = () => {
+        return toast('error', "The quantity of the product can't below 1");
+    }
+    const changeQty = (element) => {
+        //Number will plus or minus when click button
+        const unit = 1;
+        //Click to increase or decrease 
+        element.find('button').on('click', function() {
+            const that = $(this);
+            const symbol = that.find('span').text();
+            const input = that.parent().find('input');
+            const currentInput = parseInt(input.val());
+            const quantityAvailable = input.data('quantity')
+
+            const totalQty = totalQtyofItems(currentInput, unit);
+
+            if (symbol === '+') {
+                if (totalQty < quantityAvailable) {
+                    inputVal(input, totalQty);
+                } else {
+                    errorOverQty();
+                }
+            }
+
+            if (symbol === '-') {
+                if (currentInput > 1) {
+                    inputVal(input, currentInput, unit);
+                } else {
+                    notBelowOne();
+                }
+            } 
+        });
+
+        //Get init value of input when click into input
+        let initInput;
+        element.find('input').focus(function(){
+            initInput = $(this).val();
+        });
+        
+        //Change input value by enter into it
+        element.find('input').on('change', function(event) {
+            const that = $(this);
+            const quantityAvailable = that.data('quantity')
+            const currentInput = that.val();
+            const totalQty = totalQtyofItems(parseInt(currentInput), unit);
+
+            if (totalQty <= quantityAvailable) {
+                inputVal(that, currentInput);
+            } else {
+                errorOverQty();
+                inputVal(that, initInput);
+            }
+
+            if (currentInput < 1) {
+                notBelowOne();
+                inputVal(that, initInput);
+            }
+        });
+    }
+
+    //Initialization change quantiy
+    changeQty($groupNumber);
+
 });
